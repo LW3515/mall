@@ -1,0 +1,24 @@
+div.maincon{width: 94%;text-align: center;margin: 20px auto;}
+    .contitle{text-align: left;background: rgba(255,255,255,.8);padding: 0.5em 1em;border-bottom: 3px solid #039588;font-size: 1.2em;margin-top: 10px;font-weight: bold}
+    .content-wrapper{background: #E5E5E5;background-size: contain;}
+    table.table td , table.table th{text-align: center;}
+    .table tr:nth-child(odd){background: rgba(0,0,0,.03);}
+    .table tr:hover{background: rgba(255,255,255,.4);}
+    .skin-blue .main-header .navbar{}
+    .skin-blue .main-header .logo{}
+    @media (max-width: 767px) {
+        .skin-blue .main-header .navbar{background-size: cover;}
+    }
+#settingpanel{background: #E5E5E5;padding: 10px 5px;}
+	.contitle {cursor: pointer;}
+	.contitle + div{margin-bottom: 20px;}
+	.contitle + div{display: none;}
+	.contitle.active + div{display: block;}
+	input[name='mf_qq'] , input[name='mf_wechat']{width: 20em;margin:auto;}
+	a.mf_save{display: none;}
+	input.sendsms[disabled]{background: #2c3e50;}
+
+	.card{padding: 10px 0;margin: 5px 0; background: rgba(255,255,255,.8);border-radius: 8px;box-shadow: 0 2px 2px rgba(0,0,0,.5);font-family: monospace;font-size: 1.2em;text-align: left;}
+	.card div{padding: 0 10px;margin: 3px 0;}
+	.card div:nth-child(2){background: #039588;color: #fff;padding: 5px 10px;font-size: 1.2em}
+

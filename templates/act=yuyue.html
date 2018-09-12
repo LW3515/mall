@@ -1,0 +1,141 @@
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/bootstrap-switch.min.css') }}">
+<script src="{{ url_for('static',filename = 'js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static',filename = 'js/bootstrap-switch.min.js') }}"></script>
+<script src="{{ url_for('static',filename = 'js/layui.all.js') }}"></script>
+<!--  -->
+<span style='font-size:1.5em;margin-left:10px;vertical-align:middle'>是否开启自动预约排单：</span>
+<div class='switch '>
+        <input type="checkbox" id="newyuyueswitch" class="newyuyueswitch"  data-on-text="开启" data-off-text="关闭" {{ check }}>
+        <form method='post'>
+            <input  class="hidden" id="getCheck" name="getCheck" value="" >
+            <input  class="hidden" type="submit"  id="clickMe" style="margin: auto">
+        </form>
+</div>
+<div class='help tips'>开启后每隔指定天数系统会自动为您排单，请确保账户中的手续费充足。没有手续费也能排上单，但是手续费为负数时无法提现。</div>
+
+<div class="col-lg-10 newyuyue_list"  style="margin: 30px auto;font-size: 1.4em;">
+    <div class="form-group">
+        <form action="" method="post">
+            <select class="form-control" name='yy_days' id="yy_days" style="width: 28%;display: inline-block;">
+                <option name='yy_days'  value='7'>7天一单</option>
+                <option name='yy_days'  value='8'>8天一单</option>
+                <option name='yy_days'  value='9'>9天一单</option>
+                <option name='yy_days'  value='10'>10天一单</option>
+                <option name='yy_days'  value='11'>11天一单</option>
+                <option name='yy_days'  selected value='12'>12天一单</option>
+            </select>
+            </select>
+            <select class="form-control" name='yy_wine' id="yy_wine" style="width: 50%;display: inline-block;" onchange="ChangeExampleSelect(this.selectedIndex)">
+            </select>
+            <select class="form-control" name='yy_amount' id="yy_amount" style="width: 15%;display: inline-block;">
+            </select>
+            <input type="hidden" id="all_amount" name="all_amount">
+            <input type="submit" class="form-control btn btn-primary yy_submit" value="修改" style="display: inline-block;">
+        </form>
+        <table class="table">
+            <tr><th>预约日期</th><th>预约金额</th><th>状态</th></tr>
+            {% for i in yuyue %}
+            <tr>
+                <td>{{ yuyue.date }}<span class='hidden'>{{ yuyue.mobile }}</span></td>
+                <td>{{ yuyue.amount }}</td>
+                <td>等待执行</td>
+            </tr>
+            {% endfor %}
+
+            <tr>
+                <td>2018-08-22<span class='hidden'>1533917166</span></td>
+                <td>1000</td>
+                <td>等待执行</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<style>
+	div.switch{display: inline-block;height: 40px;margin:20px 0;}
+	.help{margin:10px;font-size: 1.1em;}
+</style>
+
+<script type="text/javascript">
+        //这个 请选择 选项 加的很好。
+        var jiaArr = ["请选择", "哈伯品丽珠红冰酒", "意大利威尼托桃红起泡酒","湖景精品维代尔白冰酒","拉图宾庄园奥克干红葡萄酒",];
+        var exampleArr = [
+                ["1","2","3","4","5","6","7","8","9","10"],
+                ["1","2","3","4","5","6","7","8","9","10"],
+                ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"],
+                ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20",]
+        ];
+        window.onload = function () {
+
+            var selJia = document.getElementById("yy_wine");
+            //申请空间
+            selJia.length = jiaArr.length;
+            //添加元素
+            for (var i = 0; i < jiaArr.length; i++) {
+                selJia.options[i].text = jiaArr[i];
+                selJia.options[i].value = jiaArr[i];
+            }
+        }
+
+        function ChangeExampleSelect(index)
+        {
+            var selExa = document.getElementById("yy_amount");
+
+            selExa.length = exampleArr[index].length;
+
+            for (var i = 0; i < exampleArr[index].length; i++)
+            {
+                selExa.options[i].text = exampleArr[index][i];
+                selExa.options[i].value = exampleArr[index][i];
+            }
+        }
+</script>
+<script>
+
+	(function(){
+		$('.newyuyueswitch').bootstrapSwitch();
+        var checkValue = document.getElementById("newyuyueswitch").checked;
+        //alert(checkValue);
+        if(checkValue == true){
+                $('.newyuyue_list').show();
+            }
+            else {
+                $('.newyuyue_list').hide();
+            }
+		$('.newyuyueswitch').on('switchChange.bootstrapSwitch', function (event,state) {
+            //
+            var getCheck=document.getElementById("getCheck");
+            getCheck.value=state;
+            var test = document.getElementById("clickMe");
+            test.click();
+            if(state){
+                $('.newyuyue_list').show();
+            }
+            else {
+                $('.newyuyue_list').hide();
+            }
+            //alert(state);
+            //alert('提交');
+        });
+
+        $(document).on('click','.yy_submit',function(){
+        	var wine = document.getElementById("yy_wine").value;
+            var amount = document.getElementById("yy_amount").value;
+            var all_amount = document.getElementById("all_amount");
+            if(amount==''||wine=='请选择'){
+                alert("请重新选择");
+                return false;
+            }
+            if(wine=='哈伯品丽珠红冰酒'|| wine=='意大利威尼托桃红起泡酒'){
+                all_amount.value=amount*1000;
+            }
+            else {
+                all_amount.value=amount*500;
+            }
+            //alert(wine+" "+amount+"份");
+        })
+
+	})();
+</script>

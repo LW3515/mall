@@ -1,0 +1,11 @@
+div.maincon{width: 94%;text-align: center;margin: 20px auto;}
+    .contitle{text-align: left;background: rgba(255,255,255,.8);padding: 0.5em 1em;border-bottom: 3px solid #3c8dbc;font-size: 1.2em;margin-top: 10px;font-weight: bold}
+    .content-wrapper{background: url('/static/img/newbg.jpg') 50% 50% repeat #000;background-size: contain;}
+    table.table td , table.table th{text-align: center;}
+    .table tr:nth-child(odd){background: rgba(0,0,0,.03);}
+    .table tr:hover{background: rgba(255,255,255,.4);}
+    .skin-blue .main-header .navbar{}
+    .skin-blue .main-header .logo{}
+    @media (max-width: 767px) {
+        .skin-blue .main-header .navbar{background-size: cover;}
+    }

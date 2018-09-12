@@ -1,0 +1,38 @@
+div.maincon{width: 94%;text-align: center;margin: 20px auto;}
+    .contitle{text-align: left;background: rgba(255,255,255,.8);padding: 0.5em 1em;border-bottom: 3px solid #3c8dbc;font-size: 1.2em;margin-top: 10px;font-weight: bold}
+    .content-wrapper{background:#E5E5E5;background-size: contain;}
+    table.table td , table.table th{text-align: center;}
+    .table tr:nth-child(odd){background: rgba(0,0,0,.03);}
+    .table tr:hover{background: rgba(255,255,255,.4);}
+    .skin-blue .main-header .navbar{}
+    .skin-blue .main-header .logo{}
+    @media (max-width: 767px) {
+        .skin-blue .main-header .navbar{background-size: cover;}
+    }
+#teamlist{background: rgba(255,255,255,.9);padding: 10px 5px;}
+		.nllist{margin:50px auto;text-align: left;display: block;padding: 20px;zoom:.6;}
+		.treeblock{margin-left: 40px;border-left: 1px dotted #999}
+		.nllist > .treeblock{border-left: none}
+		.treeitem{margin:10px 0 10px -10px; }
+		.treeitem > span{padding: 0 3px;vertical-align: middle;}
+		.treeitem > span:nth-child(n+3){display: inline-block;margin:0 15px 0 0;}
+		.treeitem > span:nth-child(2){display: inline-block;border:1px solid rgba(0,0,0,.3);border-radius: 50%;width: 26px;height: 24px;line-height: 24px;text-align: center;margin-left: 10px;}
+		.treeitem > span:first-child{font: normal normal normal 14px/1 FontAwesome;font-size: inherit;	text-rendering: auto;-webkit-font-smoothing: antialiased;}
+		.treeitem > span.plus:before{content: "\f0fe";cursor: pointer;margin-right: 4px;color: #2196f3}
+		.treeitem > span.minus:before{content: "\f146";cursor: pointer;margin-right: 4px;color: #aaa}
+		.treeitem > span:nth-child(3){width: 350px;text-overflow:ellipsis;overflow: hidden;white-space: nowrap;line-height: 1em;height: 1em}
+		.treeitem > span:nth-child(4){width: 220px;}
+		.treeitem > span:nth-child(5){width: 200px;}
+
+		.lx_search{height: 2.2em}
+		@media screen and (max-width: 768px) {
+			.treeblock{margin-left: 50px;}
+			.nllist{font-size: .5em;zoom:.4;margin-top: 85px;}
+			.treeitem{display: inline-block;border-bottom: 1px solid rgba(0,0,0,.05)}
+			.treeitem > span:nth-child(2){margin-left: 10px;width: 44px;height: 40px;line-height: 40px;}
+			.treeitem > span:nth-child(3){width: 280px;}
+			.treeitem > span:nth-child(4){width: 180px;}
+			.treeitem > span:nth-child(5){width: 190px;}
+			.lx_search{height: 2em}
+		}
+		.noactive{color: #fb6f00}

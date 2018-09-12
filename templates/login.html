@@ -1,0 +1,89 @@
+
+<!--  -->
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+<meta name="renderer" content="webkit">
+<link rel="shortcut icon" href="{{ url_for('static',filename = 'img/favicon.ico') }} "/>
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/layui.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/backend.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/skins/skin-blue.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/login.css') }}">
+
+<script src="{{ url_for('static',filename = 'js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static',filename = 'js/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ url_for('static',filename = 'js/bootstrap.min.js') }}"></script>
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+<!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+<![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini fixed" id="tabs">
+<div class="container">
+        <div class="login-wrapper">
+            <div class="login-screen">
+                <div class="well">
+                    <div class="login-form">
+                        <h2>欢迎登录对公流水分析系统</h2>
+                        <p id="profile-name" class="profile-name-card"></p>
+                        <form action="" method="post" id="login-form">
+                            <div id="errtips" class="hide"></div>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                </div>
+                                <input type="text" class="form-control" id="pd-form-username" placeholder="账号或手机号" name="username" autocomplete="off" autofocus="true" value="" spellcheck="false" data-rule="账号:required;username" />
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
+                                <input type="text" onfocus="this.type='password'" class="form-control" id="pd-form-password" placeholder="密码" name="password" autocomplete="off" value="" spellcheck="false" data-rule="密码:required;password" />
+                            </div>
+                            <input type="hidden" name="initocken" id="initocken" value="ddc816d4dbfa29e47be42d5e3b5425c0">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success btn-lg btn-block">登 录</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <p class="copyright"></p>
+            </div>
+        </div>
+</div>
+<script src={{ url_for('static',filename='js/jquery.md5.js') }}></script>
+<script>
+	(function(){
+		document.title='登录-Mall商城';
+		$(document).on('click','[type=submit]',function(){
+			var username = $('#pd-form-username').val();
+			var password = $('#pd-form-password').val();
+			var initocken = $('#initocken').val();
+			var secpass = $.md5(password+initocken);
+			$.ajax({
+				type:'post',
+				url:'',
+				data:'username='+username+'&initocken='+initocken+'&secpass='+secpass,
+				timeout:8000,
+				success:function(data){
+					if (data==1) {
+						location.reload();
+					}else if(data.length>100){
+						location.reload();
+					}else{
+                        alert(data);
+                    }
+				},
+				complete:function(XMLHttprequest){
+					if (XMLHttprequest.statusText=='timeout') {
+						alert('连接超时，请更换网络环境或稍后再试！');
+					}
+				}
+			});
+		})
+	})();
+</script>
+</body>
+</html>

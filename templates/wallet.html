@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>钱包</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=.8, user-scalable=yes">
+<meta name="renderer" content="webkit">
+<link rel="shortcut icon" href="{{ url_for('static',filename = 'img/favicon.ico') }} "/>
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/layui.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/backend.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/skins/skin-blue.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/wallet.css') }}">
+<script src="{{ url_for('static',filename = 'js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static',filename = 'js/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ url_for('static',filename = 'js/adminlte.js') }}"></script>
+<script src="{{ url_for('static',filename = 'js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static',filename = 'js/layui.all.js') }}"></script>
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+<!--[if lt IE 9]>
+  <script src="/assets/js/html5shiv.js"></script>
+  <script src="/assets/js/respond.min.js"></script>
+<![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini fixed" id="tabs">
+
+    
+<div class="wrapper">
+ <header id="header" class="main-header">
+<a  class="logo" style="text-decoration: none">
+    <span class="logo-mini">LX商城</span>
+    <span class="logo-lg"><b>LX商城</b></span>
+</a>
+    <nav class="navbar navbar-static-top">
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" style="width: auto;text-decoration: none;font-size: 2em;padding: 8px;background: rgba(0,0,0,.2);z-index: 999">
+            <span class="sr-only">菜单</span><span>菜单</span>
+        </a>
+
+        <div id="nav" class="pull-left">
+            <ul class="nav nav-tabs nav-addtabs disable-top-badge" role="tablist">
+            </ul>
+        </div>
+
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a style='font-size:1.2em;padding-left: 0;padding-right: 0;cursor: pointer;' class='kefuwechat' data=''>点击专属客服:<span style="display: inline-block;border:2px solid red"></span></a>
+                </li>
+                                <li>
+                    <a href="/?act=refresh" style="font-size: 1.4em;text-shadow: 0 1px 1px rgba(0,0,0,.5);color: #16fdb8"><span>张洋洋-TNT<span style='background:red;color:white;display:inline-block;margin:0 2px;border-radius:50%;padding:2px;'>新</span></span></a>
+                </li>
+                <li>
+                    <a href="/index/logout" class="btn btn-danger" style="height: 50px;border: none;font-size: 1.4em"><i class="fa fa-sign-out"></i> <span>退出</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<aside class="main-sidebar" style="background: #000;border-right: 1px solid rgba(255,255,255,.1);font-size: 1.8em;">
+<section class="sidebar">
+    <ul class="sidebar-menu">
+        <li class=" active"><a href="/?o" url="/desktop" py="kb" pinyin="shouye"><i class="fa fa-dashboard"></i> <span>首页</span> <span class="pull-right-container"> <!-- <small class="label pull-right bg-blue">hot</small> --></span></a> 
+		</li>
+
+		<li><a href="/team" url="/team" py="xw" pinyin="tuandui"><i class="fa fa-users"></i> <span>团队</span> <span class="pull-right-container"> </span></a> 
+		</li>
+
+		<li><a href="/setting" url="/setting" py="xw" pinyin="gerenshezhi"><i class="fa fa-cogs"></i> <span>个人设置</span> <span class="pull-right-container"> </span></a> 
+		</li>
+
+		<li><a href="/wallet" url="/wallet" py="xw" pinyin="qianbao"><i class="fa fa-rmb"></i> <span>钱包</span> <span class="pull-right-container"> </span></a> 
+		</li>
+        
+        <li><a href='/jifen' url='/jifen' py='jf' pinyin='jifen'><i class='fa fa-money'></i> <span>积分</span> <span class='pull-right-container'> </span></a></li>
+		<li><a href="/reg?r=DcDHcuGUz" url="/reg" py="xw" pinyin="zhucexinhuiyuan"><i class="fa fa-user-plus"></i> <span>注册新会员</span> <span class="pull-right-container"> </span></a> 
+		</li>
+
+        <li><a href="/?act=tomall" url="/?act=tomall" target="_blank"><i class="fa fa-shopping-cart"></i> <span>LX商城</span> <span class="pull-right-container"> </span></a> 
+        </li>
+        <li><a href='/deal' url='/deal'><i class='fa fa-balance-scale'></i> <span>积分交易系统</span> <span class='pull-right-container'> </span></a></li>	</ul>
+</section>
+</aside>
+<script>
+    var layer = layui.layer;
+	(function(){
+		$(document).on('click','.sidebar-menu li',function(){
+			$('.sidebar-menu li').removeClass('active');
+			$(this).addClass('active');
+		})
+        //全屏事件
+        $(document).on('click', "[data-toggle='fullscreen']", function () {
+            var doc = document.documentElement;
+            if ($(document.body).hasClass("full-screen")) {
+                $(document.body).removeClass("full-screen");
+                document.exitFullscreen ? document.exitFullscreen() : document.mozCancelFullScreen ? document.mozCancelFullScreen() : document.webkitExitFullscreen && document.webkitExitFullscreen();
+            } else {
+                $(document.body).addClass("full-screen");
+                doc.requestFullscreen ? doc.requestFullscreen() : doc.mozRequestFullScreen ? doc.mozRequestFullScreen() : doc.webkitRequestFullscreen ? doc.webkitRequestFullscreen() : doc.msRequestFullscreen && doc.msRequestFullscreen();
+            }
+        });
+        var sss = location.href.split(location.host+'/')[1];
+        if ($.inArray(sss,['team','setting','wallet','jifen','deal'])>-1) {
+            $('.sidebar-menu li').removeClass('active');
+            $(document).find('[href=\'/'+sss+'\']').parents('li').addClass('active');
+        }
+        $(document).on('click','.kefuwechat',function(){
+            var wechat = $(this).attr('data');
+            layer.open({
+                type:1,
+                content:'<div style=\'padding:30px;font-size:1.2em;text-align:center\'>官方客服微信号→ <span style=\'display:inline-block;border:1px solid #555 ;padding:2px 4px\'>'+wechat+'</span><br><br><span style=\'font-size:.85em;color:#777\'>请仔细核对微信号，防止骗子!</span></div>',
+                title:'注意'
+            })
+        })
+	})();
+</script>
+<style>
+
+</style>
+<div class="content-wrapper tab-content tab-addtabs">
+	<div role="tabpanel" class="tab-pane active" style="overflow: auto">
+		<div class="maincon">
+			<div class="walletpanel">
+				<div class="row dddd">
+					<div class="clo-lg-12">
+						<div class="num">手续费:{{  }}<span></span></div>
+					</div>
+					<div class="clo-lg-12">
+						<div class="num">本息带发放账户:{{  }}</div>
+						<span></span>
+					</div>
+					<div class="clo-lg-12">
+						<div class="num">奖励账户:{{  }}</div>
+						<span></span>
+					</div>
+					<div class="clo-lg-12">
+						<div class="num">久金:{{  }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<style>
+	.walletpanel{background: rgba(255,255,255,.9);padding: 10px 5px;}
+	.dddd{width: 96%;text-align: center;margin:0 auto;}
+	.dddd > div{height: 5em;padding: 5px;border: 1px solid rgba(0,0,0,.1)}
+	.dddd > div .num{font-size: 1.5em;font-weight: bold;display: inline-block;height: 100%;float: left;line-height: 2.8em}
+	tr.green{background: rgba(0,250,0,.2) !important;color: #444}
+	tr.red{background: rgba(250,0,0,.2) !important;color: #444}
+</style>
+<script>
+	(function(){
+	    var curpage1 = parseInt($(document).find('.page-number1.active').text());
+	    var curpage2 = parseInt($(document).find('.page-number2.active').text());
+	    if(curpage1==NaN) curpage1 =1;
+	    if(curpage2==NaN) curpage2 =1;
+	    var totalpage1 = $(document).find('.page-next1').prev('.page-number1').text();
+	    var totalpage2 = $(document).find('.page-next2').prev('.page-number2').text();
+	    function refreshpage($p1,$p2){
+	        if ($p1=='') {
+	            $p1 = curpage1;
+	        }else{
+	            curpage1 = $p1;
+	        }
+	        if ($p2=='') {
+	            $p2 = curpage2;
+	        }else{
+	            curpage2 = $p2;
+	        }
+	        var limit1   = $(document).find('.page-size1').text();
+	        var limit2   = $(document).find('.page-size2').text();
+	        var str = '';
+	        if (limit1>0) {str+='&limit1='+limit1;}
+	        if (limit2>0) {str+='&limit2='+limit2;}
+	        str+='&page1='+$p1;
+	        str+='&page2='+$p2;
+	        var xy1 = $('.btn-xy1').attr('data');
+	        var xy2 = $('.btn-xy2').attr('data');
+	        if (xy1==1){
+	        	str+='&xy1=0';
+	        }else{
+	        	str+='&xy1=1';
+	        }
+	        if (xy2==1){
+	        	str+='&xy2=0';
+	        }else{
+	        	str+='&xy2=1'
+	        }
+	        $url = '/wallet?'+str;
+	        console.log($url);
+	        location.href=$url;
+	    }
+	    $(document).on('click','.btn-xy1 , .btn-xy2',function(){
+	    	if($(this).attr('data')==0){
+	    		$(this).attr('data','1')
+	    	}else{
+	    		$(this).attr('data','0')
+	    	}
+	    	refreshpage();
+	    })
+	    $(document).on('click','.page-list1 a',function(){
+	        var p1 = $(this).text();
+	        $(document).find('.page-size1').text(p1);
+	        refreshpage();
+	    })
+	    $(document).on('click','.page-list2 a',function(){
+	        var p2 = $(this).text();
+	        $(document).find('.page-size2').text(p2);
+	        refreshpage();
+	    })
+	    $(document).on('click','.page-number1:not(.active)',function(){
+	        var p1 = parseInt($(this).text());
+	        refreshpage(p1,curpage2);
+	    })
+	    $(document).on('click','.page-number2:not(.active)',function(){
+	        var p2 = parseInt($(this).text());
+	        refreshpage(curpage1,p2);
+	    })
+	    $(document).on('keydown','.page-number1.active',function(event){
+	        var p1 = parseInt($(this).text());
+	        if (event.keyCode==13) {
+	            refreshpage(p1,curpage2);
+	        }
+	    })
+	    $(document).on('keydown','.page-number2.active',function(event){
+	        var p2 = parseInt($(this).text());
+	        if (event.keyCode==13) {
+	            refreshpage(curpage1,p2);
+	        }
+	    })
+	    $(document).on('click','.page-pre1',function(){
+	        if (curpage1==1) {
+	            refreshpage(totalpage1,curpage2);
+	        }else{
+	            refreshpage(curpage1-1,curpage2);
+	        }
+	    })
+	    $(document).on('click','.page-next1',function(){
+	        if (curpage1==totalpage1) {
+	            refreshpage(1,curpage2);
+	        }else{
+	            refreshpage(curpage1+1,curpage2);
+	        }
+	    })
+	    $(document).on('click','.page-pre2',function(){
+	        if (curpage2==1) {
+	            refreshpage(curpage1,totalpage2);
+	        }else{
+	            refreshpage(curpage1,curpage2-1);
+	        }
+	    })
+	    $(document).on('click','.page-next2',function(){
+	        if (curpage2==totalpage2) {
+	            refreshpage(curpage1,1);
+	        }else{
+	            refreshpage(curpage1,curpage2+1);
+	        }
+	    })
+	    document.title='钱包';
+
+	    $(document).on('click','.btn_tixian',function(){
+	    	var id = $(this).attr('data');
+	    	layer.confirm('提现后不再增值，是否确定提现？',{title:'请确定'},function(){
+	    		$.ajax({
+	    			type:'post',
+	    			url:'?',
+	    			data:'act=tixianone&id='+id,
+	    			success:function(data){
+	    				var res = eval("("+data+")");
+	    				layer.msg(res.content);
+	    				if (res.status==1) location.reload();
+	    			}
+	    		})
+	    	});
+	    })
+	    $(document).on('click','.dropyong',function(){
+	    	var o = $(this);
+	    	o.before("<input type='text' style='width:100px;line-height:1em;margin:0 15px;' />");
+	    	o.removeClass('dropyong').addClass('dropyongsub').text('提交');
+	    }).on('click','.dropyongsub',function(){
+	    	var o = $(this);
+	    	var num = parseInt(o.prev('input').val());
+	    	if (isNaN(num) || num<=0) {
+	    		layer.msg('请填写正确数字');
+	    		return;
+	    	}
+	    	if (num%100>0) {
+	    		layer.msg('提现数字必需为100的整数倍');
+	    		return;
+	    	}
+	    	$.ajax({
+	    		type:'post',
+	    		url:'?',
+	    		data:'act=dropyong&num='+num,
+	    		success:function(data){
+	    			if (data==1) {
+	    				layer.msg('提交成功');
+	    				setTimeout(function(){location.reload()},500)
+	    			}else{
+	    				layer.msg(data);
+	    			}
+	    		}
+	    	})
+	    })
+	})();
+</script>
+</html>

@@ -1,0 +1,37 @@
+.page_arrows{
+    background-color: rgba(128, 128, 128, 0.35);
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid rgba(188, 188, 188, 0.68);
+    cursor: pointer;
+}
+
+.page_selected{
+    margin: 1px;
+    background-color: #089885;
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid rgba(188, 188, 188, 0.68);
+    cursor: pointer;
+}
+
+.page_normal{
+    margin: 1px;
+    background-color: white;
+    color: black;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid rgba(188, 188, 188, 0.68);
+    cursor: pointer;
+}
+
+#page-box{
+    float: right;
+}
+
+/*
+.pull-left-pagination-detail{
+    width: 270px;
+}*/

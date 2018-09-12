@@ -1,0 +1,16 @@
+html,body{margin: 0;padding: 0;width: 100%;height: 100%;}
+		body{background: url('/static/img/userloginbg.jpg')center center no-repeat; background-size:cover;position: absolute;width: 100%;height: 100%;background-attachment: fixed;}
+		.page{width: 40%;position: relative; margin:0 auto;min-height: 100%;background: rgba(255,255,255,.1);}
+		.maincon{margin: 0 auto;width: 100%;background: rgba(255,255,255,.8);font-size: 2em;min-height: 400px;padding: 10px;vertical-align: middle;position: absolute;top: 120px;margin-bottom: 30px;}
+		.error{text-align: center;color: red;line-height: 400px}
+		.maincon .title{text-align: center;padding: 15px 0}
+		.maincon input{font-size: 1em;height: 40px;line-height: 40px;}
+		.maincon .btn-sendsms , .maincon .mobile-code{width: 50%;display: inline-block;margin: 0;float: left;	padding: 0 5px;}
+		.maincon .btn-sendsms{font-size: .85em;}
+		.maincon .submit{padding: 0;}
+		.maincon .invitor{font-size: .7em}
+		.maincon input[type=checkbox]{width: 30px;height: 30px;vertical-align: bottom}
+		.maincon input[type=checkbox] + span{font-size: .8em;}
+		@media screen and (max-width: 767px) {
+			.page{width: 94%}
+		}

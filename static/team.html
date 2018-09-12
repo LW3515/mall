@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>团队</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=.8, user-scalable=yes">
+<meta name="renderer" content="webkit">
+
+<link rel="shortcut icon" href="img/favicon.ico">
+<link rel="stylesheet" href="css/layui.css">
+<link rel="stylesheet" href="css/backend.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/skins/skin-blue.css">
+<link rel="stylesheet" href="css/team.css">
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script src="js/adminlte.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/layui.all.js"></script>
+<link id="layuicss-laydate" rel="stylesheet" href="js/css/modules/laydate/default/laydate.css" media="all">
+<link id="layuicss-layer" rel="stylesheet" href="js/css/modules/layer/default/layer.css" media="all">
+<link id="layuicss-skincodecss" rel="stylesheet" href="js/css/modules/code.css" media="all">
+
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+<!--[if lt IE 9]>
+  <script src="/assets/js/html5shiv.js"></script>
+  <script src="/assets/js/respond.min.js"></script>
+<![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini fixed" id="tabs">
+
+
+<div class="wrapper" style="height: auto;">
+ <header id="header" class="main-header">
+    <a class="logo" style="text-decoration: none">
+    <span class="logo-mini">久际商城</span>
+    <span class="logo-lg"><b>久际商城</b></span>
+</a>
+    <nav class="navbar navbar-static-top">
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" style="width: auto;text-decoration: none;font-size: 2em;padding: 8px;background: rgba(0,0,0,.2);z-index: 999">
+            <span class="sr-only">菜单</span><span>菜单</span>
+        </a>
+
+        <div id="nav" class="pull-left">
+            <ul class="nav nav-tabs nav-addtabs disable-top-badge" role="tablist">
+            </ul>
+        </div>
+
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a style="font-size:1.2em;padding-left: 0;padding-right: 0;cursor: pointer;" class="kefuwechat" data="rlx13994852674">点击专属客服:<span style="display: inline-block;border:2px solid red">小乐</span></a>
+                </li>
+                                <li>
+                    <a href="/?act=refresh" style="font-size: 1.4em;text-shadow: 0 1px 1px rgba(0,0,0,.5);color: #16fdb8"><span>张洋洋-TNT<span style="background:red;color:white;display:inline-block;margin:0 2px;border-radius:50%;padding:2px;">新</span></span></a>
+                </li>
+                <li>
+                    <a href="/index/logout" class="btn btn-danger" style="height: 50px;border: none;font-size: 1.4em"><span>退出</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<aside class="main-sidebar" style="background: #2E3740;border-right: 1px solid rgba(255,255,255,.1);font-size: 1.8em;">
+<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 612px;"><section class="sidebar" style="height: 612px; overflow: hidden; width: auto;">
+    <ul class="sidebar-menu">
+        <li><a href="{{ url_for('main') }}"><i class="fa fa-dashboard"></i> <span>首页</span> <span class="pull-right-container"> <!-- <small class="label pull-right bg-blue">hot</small> --></span></a>
+		</li>
+        <li><a href="{{ url_for('mall') }}"><i class="fa fa-dashboard"></i> <span>久际商城</span> <span class="pull-right-container"> <!-- <small class="label pull-right bg-blue">hot</small> --></span></a>
+		</li>
+        <li><a href="{{ url_for('wallet') }}"><i class="fa fa-rmb"></i> <span>钱包</span> <span class="pull-right-container"> </span></a>
+		</li>
+        <li><a href="{{ url_for('jiefe') }}"><i class="fa fa-money"></i> <span>积分交易系统</span> <span class="pull-right-container"> </span></a></li>
+		<li class=" active"><a href="{{ url_for('team') }}"><i class="fa fa-users"></i> <span>团队</span> <span class="pull-right-container"> </span></a>
+		</li>
+        <li><a href="{{ url_for('register_get') }}"><i class="fa fa-user-plus"></i> <span>注册新会员</span> <span class="pull-right-container"> </span></a>
+		</li>
+		<li><a href="{{ url_for('setting') }}"><i class="fa fa-cogs"></i> <span>个人设置</span> <span class="pull-right-container"> </span></a>
+		</li>
+    </ul>
+</section><div class="slimScrollBar" style="background: rgba(0, 0, 0, 0.2); width: 3px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 612px;"></div><div class="slimScrollRail" style="width: 3px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+</aside>
+<script>
+    var layer = layui.layer;
+	(function(){
+		$(document).on('click','.sidebar-menu li',function(){
+			$('.sidebar-menu li').removeClass('active');
+			$(this).addClass('active');
+		})
+        //全屏事件
+        $(document).on('click', "[data-toggle='fullscreen']", function () {
+            var doc = document.documentElement;
+            if ($(document.body).hasClass("full-screen")) {
+                $(document.body).removeClass("full-screen");
+                document.exitFullscreen ? document.exitFullscreen() : document.mozCancelFullScreen ? document.mozCancelFullScreen() : document.webkitExitFullscreen && document.webkitExitFullscreen();
+            } else {
+                $(document.body).addClass("full-screen");
+                doc.requestFullscreen ? doc.requestFullscreen() : doc.mozRequestFullScreen ? doc.mozRequestFullScreen() : doc.webkitRequestFullscreen ? doc.webkitRequestFullscreen() : doc.msRequestFullscreen && doc.msRequestFullscreen();
+            }
+        });
+        var sss = location.href.split(location.host+'/')[1];
+        if ($.inArray(sss,['team','setting','wallet','jifen','deal'])>-1) {
+            $('.sidebar-menu li').removeClass('active');
+            $(document).find('[href=\'/'+sss+'\']').parents('li').addClass('active');
+        }
+        $(document).on('click','.kefuwechat',function(){
+            var wechat = $(this).attr('data');
+            layer.open({
+                type:1,
+                content:'<div style=\'padding:30px;font-size:1.2em;text-align:center\'>官方客服微信号→ <span style=\'display:inline-block;border:1px solid #555 ;padding:2px 4px\'>'+wechat+'</span><br><br><span style=\'font-size:.85em;color:#777\'>请仔细核对微信号，防止骗子!</span></div>',
+                title:'注意'
+            })
+        })
+	})();
+</script>
+
+    	<div class="content-wrapper tab-content tab-addtabs">
+	<div role="tabpanel" class="tab-pane active" style="overflow: auto">
+		<div class="maincon">
+			<div id="teamlist">
+				<div class="btn-group" style="float: left;margin:5px;">
+	                <a class="btn btn-default active ftab">直推</a>
+	                <a class="btn btn-default ftab">团队</i></a>
+	            </div>
+	            <div class="tab">
+					<table class="table">
+						<tr>
+							<th>层级</th><th>昵称</th><th>手机号</th><th>注册时间</th><th>上次排单时间</th><th>账号状态</th><th>操作</th>
+						</tr>
+                        {% for i in info %}
+                        <tr>
+							<th>{{ i.layer }}</th><th>{{ i.nickname }}</th><th>{{ i.mobile }}</th><th>{{ i.signintime }}</th><th>{{ i.lasttime }}</th><th>{{ i.status }}</th><th>{{ i.operation }}</th>
+						</tr>
+                        {% endfor %}
+						<tr><td colspan='7'>查询结果为空</td></tr>					</table>
+
+
+					<div style="margin-top: 20px;background: #E5E5E5;color: #000000;padding: 5px;">最近七天团队新增成员</div>
+					<table class="table">
+						<tr>
+							<th>层级</th><th>昵称</th><th>手机号</th><th>注册时间</th><th>激活时间</th><th>上次排单时间</th><!--th>上次排单时间</th><th>账号状态</th-->
+						</tr>
+                        {% for i in info %}
+                        <tr>
+							<th>{{ i.layer }}</th><th>{{ i.nickname }}</th><th>{{ i.mobile }}</th><th>{{ i.signintime }}</th><th>{{ i.lasttime }}</th>
+						</tr>
+                        {% endfor %}
+						<tr><td colspan='7'>查询结果为空</td></tr>					</table>
+
+
+	            </div>
+	            <div class="tab" style="display: none">
+	            	<div class="nllist">
+	            		<div class="row">
+	            			<div class="col-md-4 col-xs-4 pull-left">共0人</div>
+		            		<div class="col-md-7 col-xs-7 pull-right row">
+		            			<input type="text" class=" lx_search col-md-7 col-xs-7" placeholder="搜索会员" /><a class="btn btn-primary col-md-4 col-xs-4" name="commonSearch">提交</a>
+		            		</div>
+	            		</div>
+
+	            		<div style='color:#999;margin-left:50px'>该会员没有下级直推</div>	            	</div>
+	            </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+(function(){
+    var curpage = parseInt($(document).find('.page-number.active').text());
+    var totalpage = $(document).find('.page-next').prev('.page-number').text();
+    function refreshpage($p){
+        if ($p=='') {
+            $p = curpage;
+        }else{
+            curpage = $p;
+        }
+        var limit   = $(document).find('.page-size').text();
+        var str = '';
+        if (limit>0) {str+='&limit='+limit;}
+        str+='&page='+$p;
+        str += $('#lookall').is(':checked')? '&all' : '';
+        $url = '/team?'+str;
+        location.href=$url;
+    }
+    var xl = [];
+    var i = 0;
+    $(document).on('click','[name=commonSearch]',function(){
+        var search  = $(this).prev('.lx_search').val();
+        $.ajax({
+        	type:'post',
+        	url:'/team?',
+        	data:'act=searchu&search='+search,
+        	success:function(data){
+        		var res = eval("("+data+")");
+        		if (res.status==0) {
+        			return layer.msg(res.content);
+        		}else{
+        			xl = res.content;
+        			doxl();
+        		}
+        	}
+        })
+    })
+    function doxl(){
+    	var d = $(document).find('.treeitem span[data-id='+xl[i]+']');
+    	if(i==xl.length-1) {
+    		d.next('span').css('background','#faa');
+    		return i=0;
+    	}
+    	d.next('span').css('background','#ffb');
+    	var ex = d.parent('div').children('div');
+    	if (ex.length) {
+    		i++;
+    		doxl();
+    	}else{
+	    	var me = d.text();
+	    	$.ajax({
+				type:'post',
+				url:'/team?',
+				data:'act=nextlevel&juid='+xl[i]+'&method='+me,
+				success:function(data){
+					d.prev('span').addClass('minus').parent('div').append(data);
+					i++;
+					doxl();
+				}
+			})
+    	}
+    }
+
+    $(document).on('keypress','.lx_search',function(e){
+        var o = $(this);
+        if (e.keyCode==13) {
+            o.next('a').click();
+        }
+    })
+    $(document).on('click','.page-list a',function(){
+        var p = $(this).text();
+        $(document).find('.page-size').text(p);
+        refreshpage();
+    })
+    $(document).on('click','.page-number:not(.active)',function(){
+        var p = parseInt($(this).text());
+        refreshpage(p);
+    })
+    $(document).on('keydown','.page-number.active',function(event){
+        var p = parseInt($(this).text());
+        if (event.keyCode==13) {
+            refreshpage(p);
+        }
+    })
+    $(document).on('click','.page-pre',function(){
+        if (curpage==1) {
+            refreshpage(totalpage);
+        }else{
+            refreshpage(curpage-1);
+        }
+    })
+    $(document).on('click','.page-next',function(){
+        if (curpage==totalpage) {
+            refreshpage(1);
+        }else{
+            refreshpage(curpage+1);
+        }
+    })
+    $(document).on('click','.btn-tuoguan',function(){
+    	var id = $(this).attr('data');
+    	layer.open({
+    		type:2,
+    		content:'?act=manage&id='+id,
+    		title:'您正在访问您直推会员的账户',
+    		offset:'0',
+    		area:['100%','100%'],
+    		btn:['返回我的账户','关闭'],
+    		yes:function(inedx,layero) {
+    			location.href='/team?act=goback';
+    		},
+    		end:function(){
+    			location.href='/';
+    		}
+    	});
+    })
+    $(document).on('click','.ftab',function(){
+    	var o = $(this);
+    	o.parent('div').find('a').toggleClass('active');
+    	$(document).find('.tab').toggle();
+    })
+    $(document).on('click','.plus',function(){
+    	var t = $(this);
+    	var ex = t.siblings('div');
+    	if(!ex.length){
+    		var id = t.next('span').attr('data-id');
+    		var me = t.next('span').text();
+    		$.ajax({
+    			type:'post',
+    			url:'/team?',
+    			data:'act=nextlevel&juid='+id+'&method='+me,
+    			success:function(data){
+    				t.addClass('minus').parent('div').append(data);
+    			}
+    		})
+    	}else{
+    		t.toggleClass('minus')
+    		ex.toggle();
+    	}
+    })
+    document.title='团队';
+})();
+</script>

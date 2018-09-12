@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>后台管理</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=.8, user-scalable=yes">
+<meta name="renderer" content="webkit">
+<link rel="shortcut icon" href="img/favicon.ico" />
+<link rel="stylesheet" href="css/layui.css">
+<link rel="stylesheet" href="css/backend.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/skins/skin-blue.css">
+<link rel="stylesheet" href="css/team.css">
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script src="js/adminlte.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/layui.all.js"></script>
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+<!--[if lt IE 9]>
+  <script src="/assets/js/html5shiv.js"></script>
+  <script src="/assets/js/respond.min.js"></script>
+<![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini fixed" id="tabs">
+
+
+<div class="wrapper">
+ <header id="header" class="main-header">
+<a  class="logo" style="text-decoration: none">
+    <span class="logo-mini">后台管理</span>
+    <span class="logo-lg"><b>后台管理</b></span>
+</a>
+    <nav class="navbar navbar-static-top">
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" style="width: auto;text-decoration: none;font-size: 2em;padding: 8px;background: rgba(0,0,0,.2);z-index: 999">
+            <span class="sr-only">菜单</span><span>菜单</span>
+        </a>
+
+        <div id="nav" class="pull-left">
+            <ul class="nav nav-tabs nav-addtabs disable-top-badge" role="tablist">
+            </ul>
+        </div>
+
+    </nav>
+</header>
+<aside class="main-sidebar" style="background: #000;border-right: 1px solid rgba(255,255,255,.1);font-size: 1.8em;">
+<section class="sidebar">
+    <ul class="sidebar-menu">
+        <li><a href="account_manage.html" url="/desktop" py="kb" pinyin="shouye"><i class="fa fa-dashboard"></i> <span>账户管理</span> <span class="pull-right-container"> <!-- <small class="label pull-right bg-blue">hot</small> --></span></a></li>
+        <li><a href="buy_manage.html" url='/deal'><i class='fa fa-balance-scale'></i> <span>买入订单管理</span> <span class='pull-right-container'> </span></a></li>
+        <li><a href="sell_manage.html" url='/deal'><i class='fa fa-balance-scale'></i> <span>卖出订单管理</span> <span class='pull-right-container'> </span></a></li>
+    </ul>
+</section>
+</aside>
+<div class="content-wrapper tab-content tab-addtabs">
+    <div role="tabpanel" class="tab-pane active" style="overflow: auto">
+		<div class="maincon">
+			<div id="teamlist">
+                <form action="" method="get">
+                    <div class="tab">
+                        <table class="table">
+                            <tr>
+                                <th>订单号</th><th>买入者</th><th>买入者卡号</th><th>买入商品</th><th>买入金额</th><th>申请日期</th><th>状态</th>
+                            </tr>
+                            <form action="get">
+                                <tr>
+                                    <th>153431530</th>
+                                    <th>张洋洋-TNT</th>
+                                    <th>6228480329385978674</th>
+                                    <th>哈伯品丽珠红冰酒 1 意大利威尼托桃红起泡酒 2</th>
+                                    <th>2000</th>
+                                    <th>2018-8-26</th>
+                                    <th>
+                                        <select  name='status' style="width: auto;height: auto;display: inline-block;">
+                                            <option name='status'  value='1'>待匹配</option>
+                                            <option name='status'  value='5'>部分完成</option>
+                                            <option name='status'  value='6'>已完成</option>
+                                        </select>
+                                    </th>
+                                </tr>
+                            </form>
+                        </table>
+                        <button type="submit" class="btn btn-primary" style="width: 10%;">修改</button>
+                        </div>
+                    </div>
+                </from>
+			</div>
+		</div>
+</div>
+
+
+<script>
+     $(function(){
+    $("#wine3_unit").bind('input porpertychange',function(){
+            var wine1_unit = document.getElementById("wine3_unit").value;
+            var wine1_price = document.getElementById("wine3_price").innerHTML;
+            var wine1 = document.getElementById("wine3_total_price");
+            var wine1_storage = document.getElementById("wine3_storage").innerHTML;
+            sum = wine1_price*wine1_unit;
+            wine1.innerHTML= sum;
+
+        });
+        });
+</script>
+
+

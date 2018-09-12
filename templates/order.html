@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>订单</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=.8, user-scalable=yes">
+<meta name="renderer" content="webkit">
+<link rel="shortcut icon" href="{{ url_for('static',filename = 'img/favicon.ico') }} "/>
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/layui.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/backend.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/skins/skin-blue.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/team.css') }}">
+<script src="{{ url_for('static',filename = 'js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static',filename = 'js/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ url_for('static',filename = 'js/adminlte.js') }}"></script>
+<script src="{{ url_for('static',filename = 'js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static',filename = 'js/layui.all.js') }}"></script>
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+<!--[if lt IE 9]>
+  <script src="/assets/js/html5shiv.js"></script>
+  <script src="/assets/js/respond.min.js"></script>
+<![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini fixed" id="tabs">
+
+    
+<div class="wrapper">
+ <header id="header" class="main-header">
+<a  class="logo" style="text-decoration: none">
+    <span class="logo-mini">LX商城</span>
+    <span class="logo-lg"><b>LX商城</b></span>
+</a>
+    <nav class="navbar navbar-static-top">
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" style="width: auto;text-decoration: none;font-size: 2em;padding: 8px;background: rgba(0,0,0,.2);z-index: 999">
+            <span class="sr-only">菜单</span><span>菜单</span>
+        </a>
+
+        <div id="nav" class="pull-left">
+            <ul class="nav nav-tabs nav-addtabs disable-top-badge" role="tablist">
+            </ul>
+        </div>
+
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a style='font-size:1.2em;padding-left: 0;padding-right: 0;cursor: pointer;' class='kefuwechat' data=''>点击专属客服:<span style="display: inline-block;border:2px solid red"></span></a>
+                </li>
+                                <li>
+                    <a href="/?act=refresh" style="font-size: 1.4em;text-shadow: 0 1px 1px rgba(0,0,0,.5);color: #16fdb8"><span>张洋洋-TNT<span style='background:red;color:white;display:inline-block;margin:0 2px;border-radius:50%;padding:2px;'>新</span></span></a>
+                </li>
+                <li>
+                    <a href="/index/logout" class="btn btn-danger" style="height: 50px;border: none;font-size: 1.4em"><i class="fa fa-sign-out"></i> <span>退出</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<aside class="main-sidebar" style="background: #000;border-right: 1px solid rgba(255,255,255,.1);font-size: 1.8em;">
+<section class="sidebar">
+    <ul class="sidebar-menu">
+        <li ><a href="/?o" url="/desktop" py="kb" pinyin="shouye"><i class="fa fa-dashboard"></i> <span>首页</span> <span class="pull-right-container"> <!-- <small class="label pull-right bg-blue">hot</small> --></span></a>
+		</li>
+
+		<li><a href="/team" url="/team" py="xw" pinyin="tuandui"><i class="fa fa-users"></i> <span>团队</span> <span class="pull-right-container"> </span></a>
+		</li>
+
+		<li><a href="/setting" url="/setting" py="xw" pinyin="gerenshezhi"><i class="fa fa-cogs"></i> <span>个人设置</span> <span class="pull-right-container"> </span></a> 
+		</li>
+
+		<li class=" active"><a href="/wallet" url="/wallet" py="xw" pinyin="qianbao"><i class="fa fa-rmb"></i> <span>钱包</span> <span class="pull-right-container"> </span></a>
+		</li>
+        
+        <li><a href='/jifen' url='/jifen' py='jf' pinyin='jifen'><i class='fa fa-money'></i> <span>积分</span> <span class='pull-right-container'> </span></a></li>
+		<li><a href="/reg?r=DcDHcuGUz" url="/reg" py="xw" pinyin="zhucexinhuiyuan"><i class="fa fa-user-plus"></i> <span>注册新会员</span> <span class="pull-right-container"> </span></a> 
+		</li>
+
+        <li><a href="/?act=tomall" url="/?act=tomall" target="_blank"><i class="fa fa-shopping-cart"></i> <span>LX商城</span> <span class="pull-right-container"> </span></a> 
+        </li>
+        <li><a href='/deal' url='/deal'><i class='fa fa-balance-scale'></i> <span>积分交易系统</span> <span class='pull-right-container'> </span></a></li>	</ul>
+</section>
+</aside>
+<div class="content-wrapper tab-content tab-addtabs">
+    <div role="tabpanel" class="tab-pane active" style="overflow: auto">
+		<div class="maincon">
+			<div id="teamlist">
+                <form action="" method="post">
+                    <div class="tab">
+                        <table class="table">
+                            <tr>
+                                <th>红酒名</th><th>今日余量</th><th>包装</th><th>单价</th><th>购买份数</th><th>总价</th>
+                            </tr>
+                            {% for i in wine %}
+                                 <tr>
+                                     <th>
+                                         <a href="{{ i.link }}" name="wine{{ i.num }}_name">{{ i.name }}</a>
+                                         <input type="hidden" name="wine{{ i.num }}_name" value="{{ i.name }}">
+                                     </th>
+                                     <th>
+                                         <p id="wine{{ i.num }}_storage" name="wine{{ i.num }}_storage">{{ i.storage }}</p>
+                                     </th>
+                                     <th>一瓶</th>
+                                     <th>
+                                         <p id="wine{{ i.num }}_price" name="wine{{ i.num }}_price">{{ i.price }}</p>
+                                     </th>
+                                     <th>
+                                         <input name="wine{{ i.num }}_unit" id="wine{{ i.num }}_unit" type="number" value="" style="width: 25%;">
+                                     </th>
+                                     <th>
+                                         <p id="wine{{ i.num }}_total_price" name="wine{{ i.num }}_total_price">0</p>
+                                     </th>
+                                 </tr>
+                            {% endfor %}
+                            <tr><td colspan='7'><button type="submit" class="btn btn-success" style="width: 10%;">结算</button></td></tr>
+                        </table>
+                        </div>
+                    </div>
+                </form>
+			</div>
+		</div>
+</div>
+<script>
+     $(function(){
+        $("#wine1_unit").bind('input porpertychange',function(){
+            var wine1_unit = document.getElementById("wine1_unit").value;
+            var wine1_price = document.getElementById("wine1_price").innerHTML;
+            var wine1_total_price = document.getElementById("wine1_total_price");
+            var wine1_storage = document.getElementById("wine1_storage").innerHTML;
+            //alert(wine1_price)
+            sum = wine1_price*wine1_unit;
+            wine1_total_price.innerHTML= sum;
+        });
+        });
+    $(function(){
+         $("#wine2_unit").bind('input porpertychange',function(){
+                var wine2_unit = document.getElementById("wine2_unit").value;
+                var wine2_price = document.getElementById("wine2_price").innerHTML;
+                var wine2_total_price = document.getElementById("wine2_total_price");
+                var wine2_storage = document.getElementById("wine2_storage").innerHTML;
+                sum = wine2_price*wine2_unit;
+                wine2_total_price.innerHTML= sum;
+            });
+            });
+    $(function(){
+         $("#wine3_unit").bind('input porpertychange',function(){
+                var wine3_unit = document.getElementById("wine3_unit").value;
+                var wine3_price = document.getElementById("wine3_price").innerHTML;
+                var wine3_total_price = document.getElementById("wine3_total_price");
+                var wine3_storage = document.getElementById("wine3_storage").innerHTML;
+                sum = wine3_price*wine3_unit;
+                wine3_total_price.innerHTML= sum;
+            });
+            });
+    $(function(){
+         $("#wine4_unit").bind('input porpertychange',function(){
+                var wine_unit = document.getElementById("wine4_unit").value;
+                var wine_price = document.getElementById("wine4_price").innerHTML;
+                var wine_total_price = document.getElementById("wine4_total_price");
+                var wine_storage = document.getElementById("wine4_storage").innerHTML;
+                sum = wine_price*wine_unit;
+                wine_total_price.innerHTML= sum;
+            });
+            });
+</script>
+<script id="num" loop_num={{num}}></script>
+<script>
+        $(function() {
+            var n = document.getElementById(num).getAttribute("loop_num");
+            for (var i = 1; i <= n; i++) {
+                var _unit_name = "#wine" + i + "_unit";
+                var unit_name = "wine" + i + "_unit";
+                var price_name = "wine" + i + "_price";
+                var total_price_name = "wine" + i + "_total_price";
+                var storage_name = "wine" + i + "_storage";
+                $("_unit_name").bind('input porpertychange', function() {
+                    var wine_unit = document.getElementById("unit_name").value;
+                    var wine_price = document.getElementById("price_name").innerHTML;
+                    var wine_total_price = document.getElementById("total_price_name");
+                    var wine_storage = document.getElementById("storage_name").innerHTML;
+                    //alert(wine1_price)
+                    sum = wine_price * wine_unit;
+                    wine_total_price.innerHTML = sum;
+                });
+            }
+
+        });
+</script>
+
+
+</body>

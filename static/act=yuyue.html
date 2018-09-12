@@ -1,0 +1,111 @@
+
+<!--  -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-switch.min.css">
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap-switch.min.js"></script>
+<script src="js/layui.all.js"></script>
+
+<span style='font-size:1.5em;margin-left:10px;vertical-align:middle'>是否开启自动预约排单：</span>
+<div class='switch '>
+        <input type="checkbox" id="newyuyueswitch" class="newyuyueswitch"  data-on-text="开启" data-off-text="关闭" checked>
+        <form method='post'>
+            <input  class="hidden" id="getCheck" name="getCheck" value="" >
+            <input  class="hidden" type="submit"  id="clickMe" style="margin: auto">
+        </form>
+</div>
+
+<div class='help tips'>开启后每隔指定天数系统会自动为您排单，请确保账户中的手续费充足。没有手续费也能排上单，但是手续费为负数时无法提现。</div>
+<form action="" method="get">
+    <div class="col-lg-10 newyuyue_list"  style="margin: 30px auto;font-size: 1.4em;">
+        <div class="form-group">
+            <select class="form-control" name='yy_days' id="yy_days" style="width: 28%;display: inline-block;">
+                <option name='yy_days'  value='7'>7天一单</option>
+                <option name='yy_days'  value='8'>8天一单</option>
+                <option name='yy_days'  value='9'>9天一单</option>
+                <option name='yy_days'  value='10'>10天一单</option>
+                <option name='yy_days'  value='11'>11天一单</option>
+                <option name='yy_days'  selected value='12'>12天一单</option>
+            </select>
+            <span class="form-control" name='yy_wine' id="yy_wine" style="width: 45%;display: inline-block;">
+                湖景品丽珠红冰酒
+            </span>
+            <select class="form-control" name='yy_amount' id="yy_amount" style="width: 20%;display: inline-block;">
+                <option name='yy_days'  value='1'>1</option>
+                <option name='yy_days'  value='2'>2</option>
+                <option name='yy_days'  value='3'>3</option>
+                <option name='yy_days'  value='4'>4</option>
+                <option name='yy_days'  value='5'>5</option>
+                <option name='yy_days'  value='6'>6</option>
+                <option name='yy_days'  value='7'>7</option>
+                <option name='yy_days'  value='8'>8</option>
+                <option name='yy_days'  value='9'>9</option>
+                <option name='yy_days'  value='10'>10</option>
+                <option name='yy_days'  value='11'>11</option>
+                <option name='yy_days'  value='12'>12</option>
+                <option name='yy_days'  value='13'>13</option>
+                <option name='yy_days'  value='14'>14</option>
+                <option name='yy_days'  value='15'>15</option>
+                <option name='yy_days'  value='16'>16</option>
+                <option name='yy_days'  value='17'>17</option>
+                <option name='yy_days'  value='18'>18</option>
+                <option name='yy_days'  value='19'>19</option>
+                <option name='yy_days'  value='20'>20</option>
+            </select>
+            <input type="hidden" id="all_amount" name="all_amount">
+            <input type="button" class="form-control btn btn-primary yy_submit" value="修改" style="display: inline-block;">
+            <table class="table">
+                <tr><th>预约日期</th><th>预约金额</th><th>状态</th></tr>
+                <tr><td>2018-08-22<span class='hidden'>1533917166</span></td><td>1000</td><td>等待执行</td></tr>
+                <tr><td>2018-09-02<span class='hidden'>1533917166</span></td><td>1000</td><td>等待执行</td></tr>
+                <tr><td>2018-09-13<span class='hidden'>1533917166</span></td><td>1000</td><td>等待执行</td></tr>
+                <tr><td>2018-09-24<span class='hidden'>1533917166</span></td><td>1000</td><td>等待执行</td></tr>
+                <tr><td>2018-10-05<span class='hidden'>1533917166</span></td><td>1000</td><td>等待执行</td></tr>
+                <tr><td>2018-10-16<span class='hidden'>1533917166</span></td><td>1000</td><td>等待执行</td></tr>
+            </table>
+        </div>
+    </div>
+</form>
+<style>
+	div.switch{display: inline-block;height: 40px;margin:20px 0;}
+	.help{margin:10px;font-size: 1.1em;}
+</style>
+
+<script>
+
+	(function(){
+		$('.newyuyueswitch').bootstrapSwitch();
+        var checkValue = document.getElementById("newyuyueswitch").checked;
+        //alert(checkValue);
+        if(checkValue == true){
+                $('.newyuyue_list').show();
+            }
+            else {
+                $('.newyuyue_list').hide();
+            }
+		$('.newyuyueswitch').on('switchChange.bootstrapSwitch', function (event,state) {
+            //
+            var getCheck=document.getElementById("getCheck");
+            getCheck.value=state;
+            var test = document.getElementById("clickMe");
+            test.click();
+            if(state){
+                $('.newyuyue_list').show();
+            }
+            else {
+                $('.newyuyue_list').hide();
+            }
+            //alert(state);
+            //alert('提交');
+        });
+
+        $(document).on('click','.yy_submit',function(){
+        	var wine = document.getElementById("yy_wine").value;
+            var amount = document.getElementById("yy_amount").value;
+            var all_amount = document.getElementById("all_amount");
+            all_amount.value=amount*500;
+            alert('预约湖景品丽珠红冰酒'+amount+'份 共'+all_amount.value+'元')
+        })
+
+	})();
+</script>

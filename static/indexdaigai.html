@@ -1,0 +1,1244 @@
+
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>跳转中...</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=.8, user-scalable=yes">
+<meta name="renderer" content="webkit">
+<link rel="shortcut icon" href="img/favicon.ico" />
+<link rel="stylesheet" href="css/layui.css">
+<link rel="stylesheet" href="css/backend.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/pageindex.css">
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script src="js/adminlte.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/layui.all.js"></script>
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+<!--[if lt IE 9]>
+  <script src="/assets/js/html5shiv.js"></script>
+  <script src="/assets/js/respond.min.js"></script>
+<![endif]-->
+</head>
+<body class="skin-blue sidebar-mini fixed" id="tabs" style="height: auto;">
+
+
+<div class="wrapper" style="height: auto;">
+ <header id="header" class="main-header">
+    <a class="logo" style="text-decoration: none">
+    <span class="logo-mini">久际商城</span>
+    <span class="logo-lg"><b>久际商城</b></span>
+</a>
+    <nav class="navbar navbar-static-top">
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" style="width: auto;text-decoration: none;font-size: 2em;padding: 8px;background: rgba(0,0,0,.2);z-index: 999">
+            <span class="sr-only">菜单</span><span>菜单</span>
+        </a>
+
+        <div id="nav" class="pull-left">
+            <ul class="nav nav-tabs nav-addtabs disable-top-badge" role="tablist">
+            </ul>
+        </div>
+
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a style="font-size:1.2em;padding-left: 0;padding-right: 0;cursor: pointer;" class="kefuwechat" data="rlx13994852674">点击专属客服:<span style="display: inline-block;border:2px solid red">小乐</span></a>
+                </li>
+                                <li>
+                    <a href="/?act=refresh" style="font-size: 1.4em;text-shadow: 0 1px 1px rgba(0,0,0,.5);color: #16fdb8"><span>张洋洋-TNT<span style="background:red;color:white;display:inline-block;margin:0 2px;border-radius:50%;padding:2px;">新</span></span></a>
+                </li>
+                <li>
+                    <a href="/index/logout" class="btn btn-danger" style="height: 50px;border: none;font-size: 1.4em"><span>退出</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<aside class="main-sidebar" style="background: #2E3740;border-right: 1px solid rgba(255,255,255,.1);font-size: 1.8em;">
+<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 612px;"><section class="sidebar" style="height: 612px; overflow: hidden; width: auto;">
+    <ul class="sidebar-menu">
+        <li class=" active"><a href="{{ url_for('main') }}"><i class="fa fa-dashboard"></i> <span>首页</span> <span class="pull-right-container"> <!-- <small class="label pull-right bg-blue">hot</small> --></span></a>
+		</li>
+        <li><a href="{{ url_for('mall') }}"><i class="fa fa-dashboard"></i> <span>久际商城</span> <span class="pull-right-container"> <!-- <small class="label pull-right bg-blue">hot</small> --></span></a>
+		</li>
+        <li><a href="{{ url_for('wallet') }}"><i class="fa fa-rmb"></i> <span>钱包</span> <span class="pull-right-container"> </span></a>
+		</li>
+        <li><a href="{{ url_for('jiefe') }}"><i class="fa fa-money"></i> <span>积分交易系统</span> <span class="pull-right-container"> </span></a></li>
+		<li><a href="{{ url_for('team') }}"><i class="fa fa-users"></i> <span>团队</span> <span class="pull-right-container"> </span></a>
+		</li>
+        <li><a href="{{ url_for('register_get') }}"><i class="fa fa-user-plus"></i> <span>注册新会员</span> <span class="pull-right-container"> </span></a>
+		</li>
+		<li><a href="{{ url_for('setting') }}"><i class="fa fa-cogs"></i> <span>个人设置</span> <span class="pull-right-container"> </span></a>
+		</li>
+    </ul>
+</section><div class="slimScrollBar" style="background: rgba(0, 0, 0, 0.2); width: 3px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 612px;"></div><div class="slimScrollRail" style="width: 3px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+</aside>
+<script>
+    var layer = layui.layer;
+	(function(){
+		$(document).on('click','.sidebar-menu li',function(){
+			$('.sidebar-menu li').removeClass('active');
+			$(this).addClass('active');
+		})
+        //全屏事件
+        $(document).on('click', "[data-toggle='fullscreen']", function () {
+            var doc = document.documentElement;
+            if ($(document.body).hasClass("full-screen")) {
+                $(document.body).removeClass("full-screen");
+                document.exitFullscreen ? document.exitFullscreen() : document.mozCancelFullScreen ? document.mozCancelFullScreen() : document.webkitExitFullscreen && document.webkitExitFullscreen();
+            } else {
+                $(document.body).addClass("full-screen");
+                doc.requestFullscreen ? doc.requestFullscreen() : doc.mozRequestFullScreen ? doc.mozRequestFullScreen() : doc.webkitRequestFullscreen ? doc.webkitRequestFullscreen() : doc.msRequestFullscreen && doc.msRequestFullscreen();
+            }
+        });
+        var sss = location.href.split(location.host+'/')[1];
+        if ($.inArray(sss,['team','setting','wallet','jifen','deal'])>-1) {
+            $('.sidebar-menu li').removeClass('active');
+            $(document).find('[href=\'/'+sss+'\']').parents('li').addClass('active');
+        }
+        $(document).on('click','.kefuwechat',function(){
+            var wechat = $(this).attr('data');
+            layer.open({
+                type:1,
+                content:'<div style=\'padding:30px;font-size:1.2em;text-align:center\'>官方客服微信号→ <span style=\'display:inline-block;border:1px solid #555 ;padding:2px 4px\'>'+wechat+'</span><br><br><span style=\'font-size:.85em;color:#777\'>请仔细核对微信号，防止骗子!</span></div>',
+                title:'注意'
+            })
+        })
+	})();
+</script>
+<style>
+    div.maincon{width: 94%;text-align: center;margin: 20px auto;}
+    .contitle{text-align: left;background: rgba(255,255,255,.8);padding: 0.5em 1em;border-bottom: 3px solid #039588;font-size: 1.2em;margin-top: 10px;font-weight: bold}
+    .content-wrapper{background:#E5E5E5;background-size: contain;}
+    table.table td , table.table th{text-align: center;}
+    .table tr:nth-child(odd){background: rgba(0,0,0,.03);}
+    .table tr:hover{background: rgba(255,255,255,.4);}
+    .skin-blue .main-header .navbar{}
+    .skin-blue .main-header .logo{}
+    @media (max-width: 767px) {
+        .skin-blue .main-header .navbar{background-size: cover;}
+    }
+</style>
+<div class="content-wrapper tab-content tab-addtabs" style="min-height: 662px;">
+	<div role="tabpanel" class="tab-pane active" style="overflow: auto">
+		<div id="tips" class="maincon">
+                </div>
+        <div id="warning" class="maincon">
+
+        </div>
+        <div id="contentbtn" class="maincon">
+            <div class="btn-group btn-group-justified">
+                <a href="#" class="btn btn-buyin skin"><i class="fa fa-dashboard" style="float: left"></i> 买入<span>VQA冰酒</span></a>
+                <a href="#" class="btn btn-book skin-green"><i class="fa fa-dashboard"></i>预约订单<span>&nbsp;</span></a>
+                <a href="#" class="btn btn-sellout skin">卖出<span>VQA冰酒</span></a>
+                <a href="#" class="btn btn-exchange">会员交易<span>&nbsp;</span></a>
+            </div>
+        </div>
+
+<style>
+.orderlist{width:100%;text-align:left;background:rgba(255,255,255,.2);padding:5px 10px;font-size:1.5em;}
+.orderlist .l_item{display:block;position:relative;padding:5px 10px;border-radius:16px;margin:10px 5px;box-shadow:0 4px 7px rgba(0,0,0,.2);text-shadow:0 1px 0 rgba(255,255,255,.7);position:relative;cursor:pointer;background:#f9f1db;background:-moz-linear-gradient(top,#f9f1db 0%,#f9ca52 100%);background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#f9f1db),color-stop(100%,#f9ca52));background:-webkit-linear-gradient(top,#f9f1db 0%,#f9ca52 100%);background:-o-linear-gradient(top,#f9f1db 0%,#f9ca52 100%);background:-ms-linear-gradient(top,#f9f1db 0%,#f9ca52 100%);
+    background:#EDEDED;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f1db',endColorstr='#f9ca52',GradientType=0);}
+.orderlist .l_item:after{content:'';display:block;position:absolute;right:3px;top:3px;width:40px;height:50px;background:url('img/status.png') no-repeat;}
+.orderlist .l_item.linstatus1:after{background-position:0 -50px;}
+.orderlist .l_item.linstatus2:after{background-position:0 -50px;}
+.orderlist .l_item.linstatus3:after{background-position:0 -300px;}
+.orderlist .l_item.linstatus4:after{background-position:0 0;}
+.orderlist .l_item.linstatus5:after{background-position:0 -150px;}
+.orderlist .l_item .orderid{font-weight:bold;color:#666;font-size:.85em}
+.orderlist .l_item .orderid + span{font-size:.8em;}
+.orderlist .l_item .bj{display:inline-block;font-weight:bold;font-size:1.1em;line-height:2em;}
+.orderlist .l_item .bj.linstatus1:after{content:'待匹配'}
+.orderlist .l_item .bj.linstatus2:after{content:'待收款'}
+.orderlist .l_item .bj.linstatus3:after{content:'待确认'}
+.orderlist .l_item .bj.linstatus4:after{content:'已完成'}
+.orderlist .l_item .bj.linstatus5:after{content:'已取消'}
+.orderlist .l_item .bj + div{display:inline-block;margin-left:1em;vertical-align:middle;}
+.orderlist .l_item .bj + div .bold{font-size:1.2em;font-weight:bold}
+.orderlist .l_item .bj + div .bold .cash{color:#33f}
+.orderlist .l_item .bj + div .bold + span{display:block;font-size:.7em;}
+.orderlist .l_item.lout,.orderlist .l_item.out{background:#e0f7bb;background:-moz-linear-gradient(top,#e0f7bb 1%,#b7f751 100%);background:-webkit-gradient(linear,left top,left bottom,color-stop(1%,#e0f7bb),color-stop(100%,#b7f751));background:-webkit-linear-gradient(top,#e0f7bb 1%,#b7f751 100%);background:-o-linear-gradient(top,#e0f7bb 1%,#b7f751 100%);background:-ms-linear-gradient(top,#e0f7bb 1%,#b7f751 100%);background:#EDEDED;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e0f7bb',endColorstr='#b7f751',GradientType=0);}
+.orderlist .l_item.loutstatus1:after{background-position:0 -50px;}
+.orderlist .l_item.loutstatus2:after{background-position:0 -50px;}
+.orderlist .l_item.loutstatus2 > div:last-of-type:after{content:'请于12点之前完成';display:block;color:#c00;bottom:2px;right:5px;position:absolute;}
+@media screen and (max-width:767px){
+	.orderlist .l_item.loutstatus2 > div:last-of-type:after{font-size:.8em}
+}
+.orderlist .l_item.loutstatus3:after{background-position:0 -300px;}
+.orderlist .l_item.loutstatus4:after{background-position:0 0;}
+.orderlist .l_item.loutstatus5:after{background-position:0 -150px;}
+.orderlist .l_item .bj.loutstatus1:after{content:'待匹配'}
+.orderlist .l_item .bj.loutstatus2:after{content:'待打款'}
+.orderlist .l_item .bj.loutstatus3:after{content:'待确认'}
+.orderlist .l_item .bj.loutstatus4:after{content:'已完成'}
+.orderlist .l_item .bj.loutstatus5:after{content:'已取消'}
+.viewcon{background:rgba(255,255,255,.7);padding:15px 10px 10px;font-size:.8em;border-bottom-left-radius:8px;border-bottom-right-radius:8px;margin:-20px 5px 5px;line-height:1.2em;display:none;}
+.viewcon .card{padding:10px 0;margin:5px 0;background:rgba(255,255,255,.8);border-radius:8px;box-shadow:0 2px 2px rgba(0,0,0,.5);font-family:monospace;font-size:1.2em}
+.viewcon .card div{padding:0 10px;margin:3px 0;}
+.viewcon .card div:nth-child(2){background:#18bc9c;color:#fff;padding:5px 10px;font-size:1.2em}
+.viewcon .card div:nth-child(2) span:first-child{color:#fff;}
+.viewcon .left{font-weight:bold;color:#666}
+.viewcon a.btn{margin:5px 5px 0 0}
+.instatus0:after{content:'排队中';}
+.instatus1:after{content:'待匹配';}
+.instatus2:after{content:'已匹配';}
+.instatus3:after{content:'匹配成功';}
+.instatus4:after{content:'待确认';}
+.instatus5:after{content:'部分完成';}
+.instatus6:after{content:'已完成';}
+.instatus7:after{content:'部分取消';}
+.instatus8:after{content:'取消';}
+.outstatus0:after{content:'排队中';}
+.outstatus1:after{content:'待匹配';}
+.outstatus2:after{content:'已匹配';}
+.outstatus3:after{content:'匹配成功';}
+.outstatus4:after{content:'待确认';}
+.outstatus5:after{content:'部分完成';}
+.outstatus6:after{content:'已完成';}
+.outstatus7:after{content:'部分取消';}
+.outstatus8:after{content:'取消';}
+.orderlist .l_item.instatus0:after{background-position:0 -50px;}
+.orderlist .l_item.instatus1:after{background-position:0 -50px;}
+.orderlist .l_item.instatus2:after{background-position:0 -50px;}
+.orderlist .l_item.instatus3:after{background-position:0 -50px;}
+.orderlist .l_item.instatus4:after{background-position:0 -300px;}
+.orderlist .l_item.instatus5:after{background-position:0 -300px;}
+.orderlist .l_item.instatus6:after{background-position:0 0;}
+.orderlist .l_item.instatus7:after{background-position:0 -200px;}
+.orderlist .l_item.instatus8:after{background-position:0 -150px;}
+.orderlist .l_item.outstatus0:after{background-position:0 -50px;}
+.orderlist .l_item.outstatus1:after{background-position:0 -50px;}
+.orderlist .l_item.outstatus2:after{background-position:0 -50px;}
+.orderlist .l_item.outstatus3:after{background-position:0 -50px;}
+.orderlist .l_item.outstatus4:after{background-position:0 -300px;}
+.orderlist .l_item.outstatus5:after{background-position:0 -50px;}
+.orderlist .l_item.outstatus6:after{background-position:0 0;}
+.orderlist .l_item.outstatus7:after{background-position:0 -200px;}
+.orderlist .l_item.outstatus8:after{background-position:0 -150px;}
+.orderlist .l_item .sbj{font-size:1.1em;font-weight:bold;}
+.orderlist .l_item.sq div{line-height:1.25em}
+.orderlist .l_item.sq div:nth-of-type(1){font-size:.8em;}
+.orderlist .l_item.sq div:nth-of-type(2){font-size:.8em;color:#666}
+.orderlist .l_item.sq div:nth-of-type(3){font-size:1.1em;color:#039588;}
+.orderlist .l_item.sq div:nth-of-type(4){font-size:.8em;font-weight:bold;}
+.orderlist .l_item.sq div:nth-of-type(5){font-size:.8em;color:#666}
+.jiakuaicon{display:inline-block;right:0;position:absolute;margin-top:-22px;margin-right:10px;}
+.jiakuaicon > input{display:inline-block;font-size:2em;transform:scale(1.6);margin:0 6px 0 9px;}
+@media screen and (min-width:767px){
+	.orderlist .l_item,.viewcon{width:50%;left:0;margin-left:50%;}
+	.orderlist .l_item.lout,.viewcon.lout{margin-left:0}
+	.orderlist.in{width:49%;padding:5px;float:right;}
+	.orderlist.out{width:49%;padding:5px;}
+}
+.orderlist .l_item.sq,.orderlist .l_item.sq + .viewcon .l_item{margin:15px 0;width:100%;}
+.orderlist .l_item.sq + .viewcon,.orderlist .l_item.sq + .viewcon .l_item + .viewcon{width:100%;margin:-27px 0 0 0;padding-top:25px;}
+.fzcon{transform:scale(1.4);display:inline-block;margin-left:30px;background:red;padding:0 5px;color:#fff;}
+.fzcon input{margin-left:10px;transform:scale(1.4);}
+</style>
+
+<div class="maincon">
+
+
+	<div class="contitle">
+		申请单列表
+    </div>
+
+
+	<div class="orderlist in" id="orderlist-in">
+        <div class="contitle" style="font-size: small">
+		    卖出申请
+        </div>
+
+        <div class="l_item sq in instatus7 closed" act="viewin" data="1508306103">
+
+            <div>参与者:张洋洋-TNT</div>
+            <div>申请单编号:1508306103(品名:法国红酒)</div>
+            <div>金额:1150元(数量:2)</div>
+            <div class="instatus5">状态:</div>
+            <div>日期:2018-07-05</div>
+        </div>
+        <div class="viewcon" style="display: none;">
+            <div>已匹配金额：1150</div>
+            <div class="l_item lin linstatus4 closed" act="viewlin" data="153431530">
+                <span class="orderid">订单号153431530</span>
+                <span>  (匹配买入订单2001584829)</span>
+                <div><div class="bj linstatus4"></div>
+                    <div><span class="bold">天使玫瑰 &gt; <span class="cash">1150</span> &gt; 您</span>
+                        <span>订单创建日期:2018-07-05</span>
+                    </div>
+                </div>
+            </div>
+            <div class="viewcon lin" style="display: none;">
+                <div><span class="left">打款人：</span>
+                    <span>天使玫瑰(135****5025)</span>
+                </div>
+                <div><span class="left">打款人领导人：</span>
+                    <span>改变(151****8588)</span>
+                </div>
+                <div class="card"><div>
+                    <span class="left">银行：</span>
+                    <span>农业银行</span>
+                </div>
+                    <div><span class="left">卡号：</span>
+                        <span class="clickbank">6228480329385978674</span>
+                    </div>
+                    <div><span class="left">支行：</span>
+                        <span>浙江省杭州市下城区石桥支行</span>
+                    </div>
+                    <div><span class="left">持有人：</span>
+                        <span>张洋洋</span>
+                    </div>
+                    <div><span class="left">支付宝：</span>
+                        <span>bincheng201314sinacom</span>
+                    </div>
+                    <div><span class="left">备注：</span>
+                        <span>LX 划款</span>
+                    </div>
+                </div>
+                <div><span class="left">收款人：</span>
+                    <span>张洋洋-TNT(153****6573)</span>
+                </div>
+                <div><span class="left">收款人领导人：</span>
+                    <span>TNT娜娜(189****0905)</span></div>
+                <div><a class="btn btn-success viewpz" target="_blank" href="viewimg.html?s=/2018/07/06/fQ/e1f0LWyylcnscZbEvJK_.jpg">查看打款凭证</a></div>
+            </div>
+        </div>
+
+        <div class="l_item sq in instatus6 closed" act="viewin" data="1508306103">
+            <span class="sbj">卖出申请</span>
+            <div>参与者:张洋洋-TNT</div>
+            <div>申请单编号:1508306103(品名:法国红酒)</div>
+            <div>金额:1150元(数量:2)</div>
+            <div class="instatus6">状态:</div>
+            <div>日期:2018-07-05</div>
+        </div>
+        <div class="viewcon" style="display: none;">
+            <div>已匹配金额：1150</div>
+            <div class="l_item lin linstatus4 closed" act="viewlin" data="153431530">
+                <span class="orderid">订单号153431530</span>
+                <span>  (匹配买入订单2001584829)</span>
+                <div><div class="bj linstatus4"></div>
+                    <div><span class="bold">天使玫瑰 &gt; <span class="cash">1150</span> &gt; 您</span>
+                        <span>订单创建日期:2018-07-05</span>
+                    </div>
+                </div>
+            </div>
+            <div class="viewcon lin" style="display: none;">
+                <div><span class="left">打款人：</span>
+                    <span>天使玫瑰(135****5025)</span>
+                </div>
+                <div><span class="left">打款人领导人：</span>
+                    <span>改变(151****8588)</span>
+                </div>
+                <div class="card"><div>
+                    <span class="left">银行：</span>
+                    <span>农业银行</span>
+                </div>
+                    <div><span class="left">卡号：</span>
+                        <span class="clickbank">6228480329385978674</span>
+                    </div>
+                    <div><span class="left">支行：</span>
+                        <span>浙江省杭州市下城区石桥支行</span>
+                    </div>
+                    <div><span class="left">持有人：</span>
+                        <span>张洋洋</span>
+                    </div>
+                    <div><span class="left">支付宝：</span>
+                        <span>bincheng201314sinacom</span>
+                    </div>
+                    <div><span class="left">备注：</span>
+                        <span>LX 划款</span>
+                    </div>
+                </div>
+                <div><span class="left">收款人：</span>
+                    <span>张洋洋-TNT(153****6573)</span>
+                </div>
+                <div><span class="left">收款人领导人：</span>
+                    <span>TNT娜娜(189****0905)</span></div>
+                <div><a class="btn btn-success viewpz" target="_blank" href="viewimg.html?s=/2018/07/06/fQ/e1f0LWyylcnscZbEvJK_.jpg">查看打款凭证</a></div>
+            </div>
+        </div>
+
+        <div class="l_item sq in instatus6 closed" act="viewin" data="1508306103">
+            <span class="sbj">卖出申请</span>
+            <div>参与者:张洋洋-TNT</div>
+            <div>申请单编号:1508306103(品名:法国红酒)</div>
+            <div>金额:1150元(数量:2)</div>
+            <div class="instatus6">状态:</div>
+            <div>日期:2018-07-05</div>
+        </div>
+        <div class="viewcon" style="display: none;">
+            <div>已匹配金额：1150</div>
+            <div class="l_item lin linstatus4 closed" act="viewlin" data="153431530">
+                <span class="orderid">订单号153431530</span>
+                <span>  (匹配买入订单2001584829)</span>
+                <div><div class="bj linstatus4"></div>
+                    <div><span class="bold">天使玫瑰 &gt; <span class="cash">1150</span> &gt; 您</span>
+                        <span>订单创建日期:2018-07-05</span>
+                    </div>
+                </div>
+            </div>
+            <div class="viewcon lin" style="display: none;">
+                <div><span class="left">打款人：</span>
+                    <span>天使玫瑰(135****5025)</span>
+                </div>
+                <div><span class="left">打款人领导人：</span>
+                    <span>改变(151****8588)</span>
+                </div>
+                <div class="card"><div>
+                    <span class="left">银行：</span>
+                    <span>农业银行</span>
+                </div>
+                    <div><span class="left">卡号：</span>
+                        <span class="clickbank">6228480329385978674</span>
+                    </div>
+                    <div><span class="left">支行：</span>
+                        <span>浙江省杭州市下城区石桥支行</span>
+                    </div>
+                    <div><span class="left">持有人：</span>
+                        <span>张洋洋</span>
+                    </div>
+                    <div><span class="left">支付宝：</span>
+                        <span>bincheng201314sinacom</span>
+                    </div>
+                    <div><span class="left">备注：</span>
+                        <span>LX 划款</span>
+                    </div>
+                </div>
+                <div><span class="left">收款人：</span>
+                    <span>张洋洋-TNT(153****6573)</span>
+                </div>
+                <div><span class="left">收款人领导人：</span>
+                    <span>TNT娜娜(189****0905)</span></div>
+                <div><a class="btn btn-success viewpz" target="_blank" href="viewimg.html?s=/2018/07/06/fQ/e1f0LWyylcnscZbEvJK_.jpg">查看打款凭证</a></div>
+            </div>
+        </div>
+
+        <div class="l_item sq in instatus6 closed" act="viewin" data="1508138281">
+            <span class="sbj">卖出申请</span><div>参与者:张洋洋-TNT</div>
+            <div>申请单编号:1508138281(品名:法国红酒)</div>
+            <div>金额:1150元(数量:2)</div>
+            <div class="instatus6">状态:</div>
+            <div>日期:2018-06-20</div>
+        </div>
+        <div class="viewcon" style="display: none;">
+            <div>已匹配金额：1150</div>
+            <div class="l_item lin linstatus4 closed" act="viewlin" data="153047861">
+                <span class="orderid">订单号153047861</span>
+                <span>  (匹配买入订单253555880)</span>
+                <div>
+                    <div class="bj linstatus4"></div>
+                    <div>
+                        <span class="bold">刘苗苗 &gt; <span class="cash">1080</span> &gt; 您</span>
+                        <span>订单创建日期:2018-06-20</span>
+                    </div>
+                </div>
+            </div>
+            <div class="viewcon lin" style="display: none;">
+                <div><span class="left">打款人：</span>
+                    <span>刘苗苗(133****3736)</span>
+                </div>
+                <div><span class="left">打款人领导人：</span><span>胡修停(132****2579)</span></div>
+                <div class="card">
+                    <div><span class="left">银行：</span>
+                        <span>农业银行</span>
+                    </div>
+                    <div><span class="left">卡号：</span>
+                        <span class="clickbank">6228480329385978674</span>
+                    </div>
+                    <div><span class="left">支行：</span>
+                        <span>浙江省杭州市下城区石桥支行</span>
+                    </div>
+                    <div><span class="left">持有人：</span>
+                        <span>张洋洋</span>
+                    </div>
+                    <div><span class="left">支付宝：</span>
+                        <span>bincheng201314sinacom</span>
+                    </div>
+                    <div><span class="left">备注：</span>
+                        <span>LX 划款</span>
+                    </div>
+                </div>
+                <div><span class="left">收款人：</span>
+                    <span>张洋洋-TNT(153****6573)</span>
+                </div>
+                <div><span class="left">收款人领导人：</span>
+                    <span>TNT娜娜(189****0905)</span>
+                </div>
+                <div><a class="btn btn-success viewpz" target="_blank" href="viewimg.html?s=/2018/06/21/M8/_WzE2vFJAiuscExyXtV_.jpg">查看打款凭证</a>
+                </div>
+            </div>
+            <div class="l_item lin linstatus4 closed" act="viewlin" data="153061920">
+                <span class="orderid">订单号153061920</span>
+                <span>  (匹配买入订单253551482)</span>
+                <div>
+                    <div class="bj linstatus4"></div>
+                    <div><span class="bold">运河畔（冷） &gt; <span class="cash">70</span> &gt; 您</span>
+                        <span>订单创建日期:2018-06-20</span>
+                    </div>
+                </div>
+            </div>
+            <div class="viewcon lin" style="display: none;">
+                <div>
+                    <span class="left">打款人：</span>
+                    <span>运河畔（冷）(158****7597)</span>
+                </div>
+                <div><span class="left">打款人领导人：</span>
+                    <span>运河畔(138****0115)</span>
+                </div>
+                <div class="card">
+                    <div><span class="left">银行：</span>
+                        <span>农业银行</span></div>
+                    <div><span class="left">卡号：</span>
+                        <span class="clickbank">6228480329385978674</span>
+                    </div>
+                    <div><span class="left">支行：</span>
+                        <span>浙江省杭州市下城区石桥支行</span>
+                    </div>
+                    <div><span class="left">持有人：</span>
+                        <span>张洋洋</span>
+                    </div>
+                    <div><span class="left">支付宝：</span>
+                        <span>bincheng201314sinacom</span>
+                    </div>
+                    <div><span class="left">备注：</span>
+                        <span>LX 划款</span>
+                    </div>
+                </div>
+                <div><span class="left">收款人：</span>
+                    <span>张洋洋-TNT(153****6573)</span>
+                </div>
+                <div><span class="left">收款人领导人：</span>
+                    <span>TNT娜娜(189****0905)</span>
+                </div>
+                <div><a class="btn btn-success viewpz" target="_blank" href="viewimg.html?s=/2018/06/21/0Q/eM6K_H_BlCIRF0tmT4t0.jpg">查看打款凭证</a></div>
+            </div>
+        </div>
+
+        <div class="fixed-table-pagination" style="display: block;">
+            <div class="pull-left pagination-detail">
+                <span class="pagination-info" id="second-page-bottom" style="font-size: .8em;color: grey">（共 6 条）每页 5 条</span>
+                <div id="page2-box">
+                    <span class="page_arrows" id="list_in_pre"><</span>
+                    <span class="page_selected" id="first-page-2">1</span>
+                    <span class="page_normal" id="second-page-2">2</span>
+                    <span class="page_arrows" id="list_in_next">></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="contitle" style="height: auto">
+            <div class="fixed-table-pagination" style="display: block;">
+                <div class="pull-left pagination-detail">
+                    <span class="pagination-info" id="second-page-bottom" style="font-size: .8em;color: grey">（共 6 条）每页 5 条</span>
+                    <div id="page2-box">
+                        <span class="page_arrows" id="list_in_pre"><</span>
+                        <span class="page_selected" id="first-page-2">1</span>
+                        <span class="page_normal" id="second-page-2">2</span>
+                        <span class="page_arrows" id="list_in_next">></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+
+	<div class="orderlist out" id="orderlist-out">
+        <div class="contitle" style="font-size: small">
+		    买入申请
+        </div>
+		<div class="l_item sq out outstatus5 closed" act="viewout" data="2001645748">
+            <div>参与者:张洋洋-TNT</div>
+            <div>申请单编号:2001645748(品名:法国红酒)</div>
+            <div>金额:1000元(数量:1)</div>
+            <div class="outstatus5">状态:</div>
+            <div>日期:2018-07-30</div>
+        </div>
+        <div class="viewcon" style="display: none;">
+            <div>已匹配金额：200</div>
+            <div class="l_item lout loutstatus4" act="viewlout" data="2002344480">
+                <span class="orderid">订单号2002344480</span>
+                <span>  (匹配卖出订单154198784)</span>
+                <div>
+                    <div class="bj loutstatus4"></div>
+                    <div><span class="bold">您 &gt; <span class="cash">200</span> &gt; 咫尺他乡</span><span>订单创建日期:2018-07-30</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="l_item sq out outstatus5 closed" act="viewout" data="2001516436"><span class="sbj">买入申请</span>
+            <div>参与者:张洋洋-TNT</div>
+            <div>申请单编号:2001516436(品名:法国红酒)</div>
+            <div>金额:1000元(数量:1)</div>
+            <div class="outstatus5">状态:</div>
+            <div>日期:2018-07-18</div>
+            <div class="jiakuaicon">加快进场:<input type="checkbox" data="2001516436" class="jiakuai"></div>
+        </div>
+        <div class="viewcon" style="display: none;">
+            <div>已匹配金额：200</div>
+            <div class="l_item lout loutstatus4 closed" act="viewlout" data="2001929066"><span class="orderid">订单号2001929066</span>
+                <span>  (匹配卖出订单153855025)</span>
+                <div>
+                    <div class="bj loutstatus4"></div>
+                    <div><span class="bold">您 &gt; <span class="cash">200</span> &gt; guo123</span>
+                        <span>订单创建日期:2018-07-18</span>
+                    </div>
+                </div>
+            </div>
+            <div class="viewcon lout" style="display: none;">
+                <div>
+                    <span class="left">打款人：</span>
+                    <span>张洋洋-TNT(153****6573)</span>
+                </div>
+                <div>
+                    <span class="left">打款人领导人：</span>
+                    <span>TNT娜娜(189****0905)</span>
+                </div>
+                <div class="card"><div>
+                    <span class="left">银行：</span>
+                    <span>工商银行</span>
+                </div>
+                    <div><span class="left">卡号：</span>
+                        <span class="clickbank">6217231605000261348</span>
+                    </div>
+                    <div>
+                        <span class="left">支行：</span>
+                        <span>山东省枣庄市山亭区支行</span>
+                    </div>
+                    <div><span class="left">持有人：</span>
+                        <span>郭赛</span>
+                    </div>
+                    <div>
+                        <span class="left">支付宝：</span>
+                        <span>15689360622</span>
+                    </div>
+                    <div>
+                        <span class="left">备注：</span>
+                        <span>lx</span>
+                    </div>
+                </div>
+                <div>
+                    <span class="left">收款人：</span>
+                    <span>guo123(150****7444)</span>
+                </div>
+                <div><span class="left">收款人领导人：</span>
+                    <span>一分钟注册一生幸福(183****3410)</span>
+                </div>
+                <div><span>打款时间：2018-07-23 11:35:22</span></div>
+                <div><a class="btn btn-success viewpz" target="_blank" href="viewimg.html?s=/2018/07/23/ug/8ZfqKBUiBlVKwPwT9my_.jpg">查看打款凭证</a></div>
+            </div>
+        </div>
+
+        <div class="l_item sq out outstatus5 closed" act="viewout" data="2001516436"><span class="sbj">买入申请</span>
+            <div>参与者:张洋洋-TNT</div>
+            <div>申请单编号:2001516436(品名:法国红酒)</div>
+            <div>金额:1000元(数量:1)</div>
+            <div class="outstatus5">状态:</div>
+            <div>日期:2018-07-18</div>
+            <div class="jiakuaicon">加快进场:<input type="checkbox" data="2001516436" class="jiakuai"></div>
+        </div>
+        <div class="viewcon" style="display: none;">
+            <div>已匹配金额：200</div>
+            <div class="l_item lout loutstatus4 closed" act="viewlout" data="2001929066"><span class="orderid">订单号2001929066</span>
+                <span>  (匹配卖出订单153855025)</span>
+                <div>
+                    <div class="bj loutstatus4"></div>
+                    <div><span class="bold">您 &gt; <span class="cash">200</span> &gt; guo123</span>
+                        <span>订单创建日期:2018-07-18</span>
+                    </div>
+                </div>
+            </div>
+            <div class="viewcon lout" style="display: none;">
+                <div>
+                    <span class="left">打款人：</span>
+                    <span>张洋洋-TNT(153****6573)</span>
+                </div>
+                <div>
+                    <span class="left">打款人领导人：</span>
+                    <span>TNT娜娜(189****0905)</span>
+                </div>
+                <div class="card"><div>
+                    <span class="left">银行：</span>
+                    <span>工商银行</span>
+                </div>
+                    <div><span class="left">卡号：</span>
+                        <span class="clickbank">6217231605000261348</span>
+                    </div>
+                    <div>
+                        <span class="left">支行：</span>
+                        <span>山东省枣庄市山亭区支行</span>
+                    </div>
+                    <div><span class="left">持有人：</span>
+                        <span>郭赛</span>
+                    </div>
+                    <div>
+                        <span class="left">支付宝：</span>
+                        <span>15689360622</span>
+                    </div>
+                    <div>
+                        <span class="left">备注：</span>
+                        <span>lx</span>
+                    </div>
+                </div>
+                <div>
+                    <span class="left">收款人：</span>
+                    <span>guo123(150****7444)</span>
+                </div>
+                <div><span class="left">收款人领导人：</span>
+                    <span>一分钟注册一生幸福(183****3410)</span>
+                </div>
+                <div><span>打款时间：2018-07-23 11:35:22</span></div>
+                <div><a class="btn btn-success viewpz" target="_blank" href="viewimg.html?s=/2018/07/23/ug/8ZfqKBUiBlVKwPwT9my_.jpg">查看打款凭证</a></div>
+            </div>
+        </div>
+
+        <div class="l_item sq out outstatus6 closed" act="viewout" data="2001404448">
+            <span class="sbj">买入申请</span>
+            <div>参与者:张洋洋-TNT</div>
+            <div>申请单编号:2001404448(品名:法国红酒)</div>
+            <div>金额:1000元(数量:1)</div>
+            <div class="outstatus6">状态:</div>
+            <div>日期:2018-07-06</div>
+        </div>
+        <div class="viewcon" style="display: none;">
+            <div>已匹配金额：1000</div>
+            <div class="l_item lout loutstatus4" act="viewlout" data="2001600128">
+                <span class="orderid">订单号2001600128</span>
+                <span>  (匹配卖出订单153538250)</span>
+                <div>
+                    <div class="bj loutstatus4"></div>
+                    <div><span class="bold">您 &gt; <span class="cash">200</span> &gt; 小城故事</span>
+                        <span>订单创建日期:2018-07-06</span>
+                    </div>
+                </div>
+            </div>
+            <div class="l_item lout loutstatus4" act="viewlout" data="2001600129">
+                <span class="orderid">订单号2001600129</span>
+                <span>  (匹配卖出订单153958332)</span>
+                <div>
+                    <div class="bj loutstatus4"></div>
+                    <div><span class="bold">您 &gt; <span class="cash">100</span> &gt; 黎霞</span>
+                        <span>订单创建日期:2018-07-06</span>
+                    </div>
+                </div>
+            </div>
+            <div class="l_item lout loutstatus4" act="viewlout" data="2002162192">
+                <span class="orderid">订单号2002162192</span>
+                <span>  (匹配卖出订单153989755)</span>
+                <div>
+                    <div class="bj loutstatus4"></div>
+                    <div><span class="bold">您 &gt; <span class="cash">700</span> &gt; 小洋</span>
+                        <span>订单创建日期:2018-07-06</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="l_item sq out outstatus6 closed" act="viewout" data="2001276646"><span class="sbj">买入申请</span><div>参与者:张洋洋-TNT</div><div>申请单编号:2001276646(品名:法国红酒)</div><div>金额:1000元(数量:1)</div><div class="outstatus6">状态:</div><div>日期:2018-06-21</div>
+        </div>
+        <div class="viewcon" style="display: none;"><div>已匹配金额：1000</div><div class="l_item lout loutstatus4" act="viewlout" data="253553000"><span class="orderid">订单号253553000</span><span>  (匹配卖出订单153117403)</span><div><div class="bj loutstatus4"></div><div><span class="bold">您 &gt; <span class="cash">200</span> &gt; 海歌</span><span>订单创建日期:2018-06-21</span></div></div></div><div class="l_item lout loutstatus4" act="viewlout" data="253553001"><span class="orderid">订单号253553001</span><span>  (匹配卖出订单153748932)</span><div><div class="bj loutstatus4"></div><div><span class="bold">您 &gt; <span class="cash">500</span> &gt; 台山1</span><span>订单创建日期:2018-06-21</span></div></div></div><div class="l_item lout loutstatus4" act="viewlout" data="2001941463"><span class="orderid">订单号2001941463</span><span>  (匹配卖出订单153723523)</span><div><div class="bj loutstatus4"></div><div><span class="bold">您 &gt; <span class="cash">300</span> &gt; 李哲</span><span>订单创建日期:2018-06-21</span></div></div></div>
+        </div>
+
+        <div class="l_item sq out outstatus6 closed" act="viewout" data="2001165018"><span class="sbj">买入申请</span><div>参与者:张洋洋-TNT</div><div>申请单编号:2001165018(品名:法国红酒)</div><div>金额:1000元(数量:1)</div><div class="outstatus6">状态:</div><div>日期:2018-06-07</div>
+        </div>
+        <div class="viewcon" style="display: none;"><div>已匹配金额：1000</div><div class="l_item lout loutstatus4" act="viewlout" data="253207726"><span class="orderid">订单号253207726</span><span>  (匹配卖出订单152809351)</span><div><div class="bj loutstatus4"></div><div><span class="bold">您 &gt; <span class="cash">200</span> &gt; 老汪</span><span>订单创建日期:2018-06-07</span></div></div></div><div class="l_item lout loutstatus4" act="viewlout" data="253207727"><span class="orderid">订单号253207727</span><span>  (匹配卖出订单153029126)</span><div><div class="bj loutstatus4"></div><div><span class="bold">您 &gt; <span class="cash">800</span> &gt; 小凡</span><span>订单创建日期:2018-06-07</span></div></div></div>
+        </div>
+
+        <div class="fixed-table-pagination" style="display: block;">
+            <div class="pull-left pagination-detail">
+				        <span class="pagination-info" style="font-size: .8em;color: #fff">
+				        (共 6 条)				        </span>
+            </div>
+        </div>
+
+	</div>
+
+
+</div>
+
+
+
+<script>
+	var $_GET = (function(){
+		var u = window.document.location.href.toString().split("?");
+		if(typeof(u[1]) == "string"){
+			u = u[1].split("&");
+			var g = {};
+			for(var i in u){
+				var j = u[i].split("=");
+				g[j[0]] = j[1];
+			}
+			return g;
+		} else {
+			return {};
+		}
+	})();
+
+	(function(){
+		$(document).on('click','.l_item',function(){
+			var o = $(this);
+			if (o.hasClass('open')) {
+				$(this).removeClass('open').addClass('closed');
+				$(this).next('.viewcon').slideToggle(200);
+			}else if(o.hasClass('closed')){
+				$(this).removeClass('closed').addClass('open');
+				$(this).next('.viewcon').slideToggle(200);
+			}else{
+				var id = o.attr('data');
+				var act = o.attr('act');
+				o.addClass('open');
+				$.ajax({
+					type:'post',
+					url:'?',
+					data:'act='+act+'&id='+id,
+					timeout:7000,
+					success:function(data){
+						o.after(data);
+						o.next('.viewcon').slideDown(200);
+					},
+					complete:function(XMLHttprequest){
+						if (XMLHttprequest.StatusText=='timeout') layer.msg('网络连接超时，请更换网络环境或稍后再试！')
+					}
+
+				});
+			}
+		})
+		var curpage1 = parseInt($(document).find('.page-number1.active').text());
+	    var curpage2 = parseInt($(document).find('.page-number2.active').text());
+	    var totalpage1 = $(document).find('.page-next1').prev('.page-number1').text();
+	    var totalpage2 = $(document).find('.page-next2').prev('.page-number2').text();
+	    function refreshpage($p1,$p2){
+	        if (!$p1) {
+	            $p1 = curpage1;
+	        }else{
+	            curpage1 = $p1;
+	        }
+	        if (!$p2) {
+	            $p2 = curpage2;
+	        }else{
+	            curpage2 = $p2;
+	        }
+	        var limit1 = $(document).find('.page-size1').text();
+	        var limit2 = $(document).find('.page-size2').text();
+	        var str = '';
+	        if (limit1>0) {str+='&limit1='+limit1;}
+	        if (limit2>0) {str+='&limit2='+limit2;}
+	        str+='&page1='+$p1;
+	        str+='&page2='+$p2;
+	        if ($_GET['showall']) str+='&showall=1';
+	        $url = '/?o'+str;
+	        location.href=$url;
+	    }
+	    $(document).on('click','.page-list1 a',function(){
+	        var p1 = $(this).text();
+	        $(document).find('.page-size1').text(p1);
+	        refreshpage();
+	    })
+	    $(document).on('click','.page-list2 a',function(){
+	        var p2 = $(this).text();
+	        $(document).find('.page-size2').text(p2);
+	        refreshpage();
+	    })
+	    $(document).on('click','.page-number1:not(.active)',function(){
+	        var p1 = parseInt($(this).text());
+	        refreshpage(p1,curpage2);
+	    })
+	    $(document).on('click','.page-number2:not(.active)',function(){
+	        var p2 = parseInt($(this).text());
+	        refreshpage(curpage1,p2);
+	    })
+	    $(document).on('keydown','.page-number1.active',function(event){
+	        var p1 = parseInt($(this).text());
+	        if (event.keyCode==13) {
+	            refreshpage(p1,curpage2);
+	        }
+	    })
+	    $(document).on('keydown','.page-number2.active',function(event){
+	        var p2 = parseInt($(this).text());
+	        if (event.keyCode==13) {
+	            refreshpage(curpage1,p2);
+	        }
+	    })
+	    $(document).on('click','.page-pre1',function(){
+	        if (curpage1==1) {
+	            refreshpage(totalpage1,curpage2);
+	        }else{
+	            refreshpage(curpage1-1,curpage2);
+	        }
+	    })
+	    $(document).on('click','.page-next1',function(){
+	        if (curpage1==totalpage1) {
+	            refreshpage(1,curpage2);
+	        }else{
+	            refreshpage(curpage1+1,curpage2);
+	        }
+	    })
+	    $(document).on('click','.page-pre2',function(){
+	        if (curpage2==1) {
+	            refreshpage(curpage1,totalpage2);
+	        }else{
+	            refreshpage(curpage1,curpage2-1);
+	        }
+	    })
+	    $(document).on('click','.page-next2',function(){
+	        if (curpage2==totalpage2) {
+	            refreshpage(curpage1,1);
+	        }else{
+	            refreshpage(curpage1,curpage2+1);
+	        }
+	    })
+
+	})();
+
+    //分页
+    window.onload = function () {
+                    var prePage1 = document.getElementById("list_out_pre");
+                    var nextPage1 = document.getElementById("list_out_next");
+                    var first1 = document.getElementById("first-page-1");
+                    var second1 = document.getElementById("second-page-1");
+                    var firstPageBottom = document.getElementById("first-page-bottom");
+                    var allList1 = $("#orderlist-out").children("div");
+
+                    var prePage2 = document.getElementById("list_in_pre");
+                    var nextPage2 = document.getElementById("list_in_next");
+                    var first2 = document.getElementById("first-page-2");
+                    var second2 = document.getElementById("second-page-2");
+                    var secondPageBottom = document.getElementById("second-page-bottom");
+                    var allList2 = $("#orderlist-in").children("div");
+
+                    var itemSize1 = (allList1.length - 2) / 2;
+                    var currentPage1 = 1;
+                    var anotherPage1 = 2;
+                    var lastPage1 = Math.ceil(itemSize1 / 5);
+                    var itemSize2 = (allList2.length - 2) / 2;
+                    var currentPage2 = 1;
+                    var anotherPage2 = 2;
+                    var lastPage2 = Math.ceil(itemSize2 / 5);
+
+                    //显示第n页的内容
+                    function showPage(currentPage, lastPage, itemSize, allList){
+                        var start = (currentPage - 1) * 5 * 2 + 1;
+                        var end;
+                        if(currentPage != lastPage){
+                            end = currentPage * 5 * 2;
+                        }else{
+                            end = itemSize * 2;
+                        }
+                        console.log("start:"+start+",end:"+end+",itemSize:"+itemSize+",currentPage:"+currentPage+",lastPage:"+lastPage);
+                        for(var i = 1;i < allList.length - 1;i++){
+                            allList[i].style.display = "";
+                            if(i < start || i > end){
+                                allList[i].style.display = "none";
+                            }
+                        }
+                    }
+                    showPage(currentPage1, lastPage1, itemSize1, allList1);
+                    showPage(currentPage2, lastPage2, itemSize2, allList2);
+                    if(lastPage1 == 1){
+                        second1.style.display = "none";
+                    }
+                    if(lastPage2 == 1){
+                        second2.style.display = "none";
+                    }
+                    firstPageBottom.innerText = "（共 "+itemSize1+" 条）每页 5 条";
+                    secondPageBottom.innerText = "（共 "+itemSize2+" 条）每页 5 条";
+
+                    //事件
+                    prePage1.onclick = function () {
+                        if(currentPage1 == 1){
+                            alert("已经是第一页");
+                        }else{
+                            currentPage1--;
+                            anotherPage1--;
+                            first1.innerText = currentPage1;
+                            second1.innerText = anotherPage1;
+                            first1.className = "page_selected";
+                            second1.className = "page_normal";
+                            showPage(currentPage1, lastPage1, itemSize1, allList1);
+                        }
+                    }
+
+                    nextPage1.onclick = function () {
+                        if(currentPage1 == lastPage1){
+                            alert("已经是最后一页");
+                        }
+                        else if(currentPage1 == lastPage1 - 1){
+                            first1.innerText = currentPage1;
+                            second1.innerText = anotherPage1;
+                            first1.className = "page_normal";
+                            second1.className = "page_selected";
+                            currentPage1++;
+                            anotherPage1++;
+                            showPage(currentPage1, lastPage1, itemSize1, allList1);
+                        }else{
+                            currentPage1++;
+                            anotherPage1++;
+                            first1.innerText = currentPage1;
+                            second1.innerText = anotherPage1;
+                            showPage(currentPage1, lastPage1, itemSize1, allList1);
+                        }
+                    }
+
+                    first1.onclick = function () {
+                        if(anotherPage1 > lastPage1 && lastPage1 != 1){
+                            currentPage1--;
+                            anotherPage1--;
+                            first1.className = "page_selected";
+                            second1.className = "page_normal";
+                            showPage(currentPage1, lastPage1, itemSize1, allList1);
+                        }
+                    }
+
+                    second1.onclick =function () {
+                        if(anotherPage1 <= lastPage1){
+                            if(anotherPage1 == lastPage1){
+                                first1.innerText = currentPage1;
+                                second1.innerText = anotherPage1;
+                                first1.className = "page_normal";
+                                second1.className = "page_selected";
+                                currentPage1++;
+                                anotherPage1++;
+                            }else{
+                                currentPage1++;
+                                anotherPage1++;
+                                first1.innerText = currentPage1;
+                                second1.innerText = anotherPage1;
+                                first1.className = "page_selected";
+                                second1.className = "page_normal";
+                            }
+                            showPage(currentPage1, lastPage1, itemSize1, allList1);
+                        }
+                    }
+
+                    prePage2.onclick = function () {
+                        if(currentPage2 == 1){
+                            alert("已经是第一页");
+                        }else{
+                            currentPage2--;
+                            anotherPage2--;
+                            first2.innerText = currentPage2;
+                            second2.innerText = anotherPage2;
+                            first2.className = "page_normal";
+                            second2.className = "page_selected";
+                            showPage(currentPage2, lastPage2, itemSize2, allList2);
+                        }
+                    }
+
+                    nextPage2.onclick = function () {
+                        if(currentPage2 == lastPage2){
+                            alert("已经是最后一页");
+                        }
+                        else if(currentPage2 == lastPage2 - 1){
+                            first2.innerText = currentPage2;
+                            second2.innerText = anotherPage2;
+                            first2.className = "page_normal";
+                            second2.className = "page_selected";
+                            currentPage2++;
+                            anotherPage2++;
+                            showPage(currentPage2, lastPage2, itemSize2, allList2);
+                        }else{
+                            currentPage2++;
+                            anotherPage2++;
+                            first2.innerText = currentPage2;
+                            second2.innerText = anotherPage2;
+                            showPage(currentPage2, lastPage2, itemSize2, allList2);
+                        }
+                    }
+
+                    first2.onclick = function () {
+                        if(anotherPage2 > lastPage2 && lastPage2 != 1){
+                            currentPage2--;
+                            anotherPage2--;
+                            first2.className = "page_selected";
+                            second2.className = "page_normal";
+                            showPage(currentPage2, lastPage2, itemSize2, allList2);
+                        }
+                    }
+
+                    second2.onclick =function () {
+                        if(anotherPage2 <= lastPage2){
+                            if(anotherPage2 == lastPage2){
+                                first2.innerText = currentPage2;
+                                second2.innerText = anotherPage2;
+                                first2.className = "page_normal";
+                                second2.className = "page_selected";
+                                currentPage2++;
+                                anotherPage2++;
+                            }else{
+                                currentPage2++;
+                                anotherPage2++;
+                                first2.innerText = currentPage2;
+                                second2.innerText = anotherPage2;
+                                first2.className = "page_selected";
+                                second2.className = "page_normal";
+                            }
+                            showPage(currentPage2, lastPage2, itemSize2, allList2);
+                        }
+                    }
+                }
+
+</script>
+
+	</div>
+</div>
+<iframe id="exec_target" name="exec_target" style="
+display: none"></iframe>
+
+<script>
+    var orderid;
+    var upbtn=document.createElement("button");
+    var t=document.createTextNode("选择图片");
+    upbtn.appendChild(t);
+	(function(){
+		document.title='首页';
+
+        $(document).on('change','#selltype',function(){
+            if ($(this).val()==1) {
+                $('#sell_num').attr('placeholder','最多可提现金额'+$('.jiangli_cash').val()+'元');
+            }else{
+                $('#sell_num').attr('placeholder','最多可提现金额'+$('.benxi_cash').val()+'元');
+            }
+        })
+        $(document).on('input','#sell_num',function(){
+            var o = $(this);
+            if ($('#selltype').val()==1) {
+                var max = $('.jiangli_cash').val();
+            }else{
+                var max = $('.benxi_cash').val();
+            }
+            max = parseInt(max);
+            if (parseInt(o.val())>max) {
+                layer.msg('输入金额不得大于账户内余额');
+                o.val(max);
+            }
+        })
+
+        //买入
+        $(document).on('click','.btn-buyin',function(){
+            layer.open({
+                title:'买入订单',
+                type:2,
+                content:'btn-buyin.html',
+                area: ['400px', '75%'],
+                btn:['关闭']
+            })
+        })
+        //预约订单
+        $(document).on('click','.btn-book',function(){
+            layer.open({
+                title:'预约订单',
+                type:2,
+                content:'act=yuyue.html',
+                area: ['400px', '75%'],
+                btn:['关闭']
+            })
+        })
+        //卖出
+        $(document).on('click','.btn-sellout',function(){
+            layer.open({
+                title:'卖出订单',
+                type:2,
+                content:'btn-sellout.html',
+                area: ['400px', '75%'],
+                btn:['关闭']
+            })
+        })
+        $(document).on('click','.querenshoukuan',function(){
+            var id = $(this).attr('data');
+            layer.open({
+                title:'请确认',
+                offset:'20%',
+                area:['300px','200px'],
+                type:1,
+                content:'<div style=\'padding:30px\'>请确认是否收到对方打款</div>',
+                btn:['确认','取消'],
+                yes:function(index,layero){
+                    layer.load();
+                    $.ajax({
+                        type:'post',
+                        url:'?',
+                        data:'act=querenshoukuan&id='+id,
+                        timeout:7000,
+                        success:function(data){
+                            if (data=1) {
+                                layer.msg('操作成功,请刷新！');
+                                layer.close(index);
+                                location.reload();
+                            }else{
+                                layer.msg(data);
+                            }
+                        },
+                        complete:function(XMLHttprequest){
+                            layer.closeAll('loading');
+                            if (XMLHttprequest.statusText=='timeout') {
+                                layer.msg('连接超时，请稍后再试！');
+                            }
+                        }
+                    });
+                }
+            });
+        })
+
+        $(document).on('click','.clickbank',function(){
+            var o = $(this);
+            var t = o.text();
+            t = t.replace(/ /g,'');
+            o.text(t);
+        })
+
+        //tips
+        $(document).on('click','.hptip.alert',function(){
+            var o = $(this);
+            var p = o.next('.window').html();
+            layer.open({
+                type:1,
+                content:p,
+                title:'警告',
+                btn:['关闭']
+            })
+        })
+        var initime = Math.round(new Date().getTime()/1000);
+        setInterval(function(){
+            $('.daojishi').each(function(){
+                var o = $(this);
+                var ts = parseInt(o.attr('data'));
+                var newnow = Math.round(new Date().getTime()/1000);
+                var past = newnow-initime;
+                var n = ts-past;
+                var newtime = Math.floor(n/3600)+'小时'+Math.floor((n%3600)/60)+'分'+(n%60)+'秒';
+                o.html(newtime);
+            })
+        },1000);
+	})();
+
+
+</script>
+<style>
+    div#contentbtn .btn{ margin:0px 15px 0px 15px; padding: 10px 0;font-size:2em;color: white;font-weight: bold;width: 20%;display: inline-block;}
+    div#contentbtn .btn:first-child{float: left;margin:0px 6.6% 0px 0px;}
+    div#contentbtn .btn:nth-child(2){float: left;margin:0px 6.6% 0px 0px;}
+    div#contentbtn .btn:nth-child(3){float: left;margin:0px 6.6% 0px 0px;}
+    div#contentbtn .btn:nth-child(4){float: left;margin:0px 0px 0px 0px;background-color: #EF7172;}
+    div#contentbtn .btn:hover {background: #2329f7  }
+    div#contentbtn .btn:focus {background: #2471a6}
+    div#contentbtn .btn span{display: block;font-size: .5em;font-weight: normal;}
+    .skin-green{ background-color: #039588;}
+
+    a.normal{display: block;font-size: 1.3em;padding: 10px 0; background: rgba(20,100,80,.6);border: rgba(255,255,255,.8);text-align: center;color: #fff;text-decoration: none}
+    .buyincon ,.sellcon{background: #fff;width: 100%;padding: 10px;margin-top: -5px;text-align: left;}
+    .wine{display: inline-block;width: 40px;height: 40px;vertical-align: bottom;margin: 3px 5px 0;border: 1px solid rgba(0,0,0,.3);background: url('assets/img/wine.jpg')center center no-repeat;background-size: contain;}
+
+    .btn.btn-buyin{background: #5d9cec;}
+    .btn.btn-sellout{background:#7266BA }
+    .btn.btn-buyin:hover, .btn.btn-sellout:hover{color: #fff !important;text-shadow: none}
+    #upbtncon{padding: 20px;min-height: 50px;}
+
+    .btn.showall{display: block;margin:20px auto;}
+    .hptip{display: block;width: 100%;background: #f00;padding: 10px 0; text-align: center;color: #fff;font-size: 1.2em;cursor: pointer;}
+    .hptip + .window{display: none;}
+    .windowin{padding: 5px 10px;}
+</style>
+</div></body>

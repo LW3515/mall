@@ -1,0 +1,444 @@
+
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="UTF-8">
+	<title>设置</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=.8, user-scalable=yes">
+<meta name="renderer" content="webkit">
+<link rel="shortcut icon" href="{{ url_for('static',filename = 'img/favicon.ico') }} "/>
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/layui.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/backend.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/skins/skin-blue.css') }}">
+<link rel="stylesheet" href="{{ url_for('static',filename = 'css/setting.css') }}">
+
+<script src="{{ url_for('static',filename = 'js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static',filename = 'js/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ url_for('static',filename = 'js/adminlte.js') }}"></script>
+<script src="{{ url_for('static',filename = 'js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static',filename = 'js/layui.all.js') }}"></script>
+<link id="layuicss-laydate" rel="stylesheet" href="{{ url_for('static',filename = 'js/css/modules/laydate/default/laydate.css') }}" media="all">
+<link id="layuicss-layer" rel="stylesheet" href="{{ url_for('static',filename = 'js/css/modules/layer/default/layer.css') }}" media="all">
+<link id="layuicss-skincodecss" rel="stylesheet" href="{{ url_for('static',filename = 'js/css/modules/code.css') }}" media="all">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+<!--[if lt IE 9]>
+  <script src="/assets/js/html5shiv.js"></script>
+  <script src="/assets/js/respond.min.js"></script>
+<![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini fixed" id="tabs">
+
+    
+<div class="wrapper">
+ <header id="header" class="main-header">
+<a  class="logo" style="text-decoration: none">
+    <span class="logo-mini">LX商城</span>
+    <span class="logo-lg"><b>LX商城</b></span>
+</a>
+    <nav class="navbar navbar-static-top">
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" style="width: auto;text-decoration: none;font-size: 2em;padding: 8px;background: rgba(0,0,0,.2);z-index: 999">
+            <span class="sr-only">菜单</span><span>菜单</span>
+        </a>
+
+        <div id="nav" class="pull-left">
+            <ul class="nav nav-tabs nav-addtabs disable-top-badge" role="tablist">
+            </ul>
+        </div>
+
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a style='font-size:1.2em;padding-left: 0;padding-right: 0;cursor: pointer;' class='kefuwechat' data=''>点击专属客服:<span style="display: inline-block;border:2px solid red"></span></a>
+                </li>
+                                <li>
+                    <a href="/?act=refresh" style="font-size: 1.4em;text-shadow: 0 1px 1px rgba(0,0,0,.5);color: #16fdb8"><span>张洋洋-TNT<span style='background:red;color:white;display:inline-block;margin:0 2px;border-radius:50%;padding:2px;'>新</span></span></a>
+                </li>
+                <li>
+                    <a href="/index/logout" class="btn btn-danger" style="height: 50px;border: none;font-size: 1.4em"><i class="fa fa-sign-out"></i> <span>退出</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<aside class="main-sidebar" style="background: #000;border-right: 1px solid rgba(255,255,255,.1);font-size: 1.8em;">
+<section class="sidebar">
+    <ul class="sidebar-menu">
+        <li class=" active"><a href="/?o" url="/desktop" py="kb" pinyin="shouye"><i class="fa fa-dashboard"></i> <span>首页</span> <span class="pull-right-container"> <!-- <small class="label pull-right bg-blue">hot</small> --></span></a> 
+		</li>
+
+		<li><a href="/team" url="/team" py="xw" pinyin="tuandui"><i class="fa fa-users"></i> <span>团队</span> <span class="pull-right-container"> </span></a> 
+		</li>
+
+		<li><a href="/setting" url="/setting" py="xw" pinyin="gerenshezhi"><i class="fa fa-cogs"></i> <span>个人设置</span> <span class="pull-right-container"> </span></a> 
+		</li>
+
+		<li><a href="/wallet" url="/wallet" py="xw" pinyin="qianbao"><i class="fa fa-rmb"></i> <span>钱包</span> <span class="pull-right-container"> </span></a> 
+		</li>
+        
+        <li><a href='/jifen' url='/jifen' py='jf' pinyin='jifen'><i class='fa fa-money'></i> <span>积分</span> <span class='pull-right-container'> </span></a></li>
+		<li><a href="/reg?r=DcDHcuGUz" url="/reg" py="xw" pinyin="zhucexinhuiyuan"><i class="fa fa-user-plus"></i> <span>注册新会员</span> <span class="pull-right-container"> </span></a> 
+		</li>
+
+        <li><a href="/?act=tomall" url="/?act=tomall" target="_blank"><i class="fa fa-shopping-cart"></i> <span>LX商城</span> <span class="pull-right-container"> </span></a> 
+        </li>
+        <li><a href='/deal' url='/deal'><i class='fa fa-balance-scale'></i> <span>积分交易系统</span> <span class='pull-right-container'> </span></a></li>	</ul>
+</section>
+</aside>
+<script>
+    var layer = layui.layer;
+	(function(){
+		$(document).on('click','.sidebar-menu li',function(){
+			$('.sidebar-menu li').removeClass('active');
+			$(this).addClass('active');
+		})
+        //全屏事件
+        $(document).on('click', "[data-toggle='fullscreen']", function () {
+            var doc = document.documentElement;
+            if ($(document.body).hasClass("full-screen")) {
+                $(document.body).removeClass("full-screen");
+                document.exitFullscreen ? document.exitFullscreen() : document.mozCancelFullScreen ? document.mozCancelFullScreen() : document.webkitExitFullscreen && document.webkitExitFullscreen();
+            } else {
+                $(document.body).addClass("full-screen");
+                doc.requestFullscreen ? doc.requestFullscreen() : doc.mozRequestFullScreen ? doc.mozRequestFullScreen() : doc.webkitRequestFullscreen ? doc.webkitRequestFullscreen() : doc.msRequestFullscreen && doc.msRequestFullscreen();
+            }
+        });
+        var sss = location.href.split(location.host+'/')[1];
+        if ($.inArray(sss,['team','setting','wallet','jifen','deal'])>-1) {
+            $('.sidebar-menu li').removeClass('active');
+            $(document).find('[href=\'/'+sss+'\']').parents('li').addClass('active');
+        }
+        $(document).on('click','.kefuwechat',function(){
+            var wechat = $(this).attr('data');
+            layer.open({
+                type:1,
+                content:'<div style=\'padding:30px;font-size:1.2em;text-align:center\'>官方客服微信号→ <span style=\'display:inline-block;border:1px solid #555 ;padding:2px 4px\'>'+wechat+'</span><br><br><span style=\'font-size:.85em;color:#777\'>请仔细核对微信号，防止骗子!</span></div>',
+                title:'注意'
+            })
+        })
+	})();
+</script>
+
+<div class="content-wrapper tab-content tab-addtabs">
+	<div role="tabpanel" class="tab-pane active" style="overflow: auto">
+		<div class="maincon">
+			<div id="settingpanel">
+				<div class="contitle active">
+					基本信息
+				</div>
+				<div>
+					<table class="table">
+						<tr>
+							<td>昵称</td>
+							<td>{{ nickname }}张洋洋-TNT</td>
+						</tr>
+						<tr>
+							<td>账号</td>
+							<td>{{ account }}</td>
+						</tr>
+						<tr>
+							<td>状态</td>
+							<td>{{ status }}</td>
+						</tr>
+						<tr>
+							<td>手机号</td>
+							<td class="user_mobile">{{ mobile }}</td>
+						</tr>
+						<tr>
+							<td>注册日期</td>
+							<td>{{ regist_data }}</td>
+						</tr>
+					</table>
+				</div>
+				<div class="contitle">
+					修改密码
+				</div>
+				<div>
+                    <form action="" method="post">
+                        <div style="width: 80%;margin: auto">
+                            <div style="margin: 10px 0">
+                                <span style="display: inline-block;width: 49%">输入旧的密码：</span><input value="" type="text" id="old_pwd" name="old_pwd" class="form-control newpwd" maxlength="23" placeholder="请勿输入除字母、数字、@、_以外的字符" style="width: 49%;display: inline-block; " />
+                            </div>
+                            <div style="margin: 10px 0">
+                                <span style="display: inline-block;width: 49%">输入新的密码：</span><input value="" type="text" id="new_pwd" name="new_pwd" class="form-control newpwd" maxlength="23" placeholder="请勿输入除字母、数字、@、_以外的字符" style="width: 49%;display: inline-block; " />
+                            </div>
+                            <div style="margin: 10px 0">
+                                <span style="display: inline-block;width: 49%">确认新的密码：</span><input value="" type="text" id="new_pwd1" name="new_pwd1" class="form-control newpwd" maxlength="23" placeholder="请勿输入除字母、数字、@、_以外的字符" style="width: 49%;display: inline-block; " />
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-success btn-lg btn-block" onclick="return  changePwt()">修改密码</button>
+                            </div>
+                        </div>
+                    </form>
+                    <script>
+                        function changePwt(){
+                            var oldpwd = document.getElementById("old_pwd").value;
+                            var pwd = document.getElementById("new_pwd").value;
+                            var pwdrepeat = document.getElementById("new_pwd1").value;
+                            if(oldpwd=='' || pwd=='' || pwdrepeat==''){
+                                alert('不能为空')
+                                return false;
+                            }
+                            if(pwd!=pwdrepeat){
+                                alert('两次密码不一样请重新设置新密码')
+                                return false;
+                            }
+                            return true;
+                        }
+                    </script>
+				</div>
+				<div class="contitle">
+					领导人信息
+				</div>
+				<div>
+										<table class="table">
+						<tr>
+							<td>昵称</td>
+							<td>{{ leader_nickname }}</td>
+						</tr>
+						<tr>
+							<td>账号</td>
+							<td>{{ leader_account }}</td>
+						</tr>
+						<tr>
+							<td>手机号</td>
+							<td>{{ leader_mobile }}</td>
+						</tr>
+
+					</table>
+				</div>
+
+				<div class="contitle">
+					银行卡
+				</div>
+				<div>
+					<div class='card'><div><span class='left'>银行：</span><span>{{ bank_name }}</span></div>
+                        <div><span class='left'>卡号：</span><span>{{ bank_account }}</span></div>
+                        <div><span class='left'>支行：</span><span>{{ bank_address }}</span></div>
+                        <div><span class='left'>持有人：</span><span>{{ bank_owner }}</span></div>
+                        <div><span class='left'>支付宝：</span><span>{{ ali_pay }}</span></div>
+                        <div><span class='left'>备注：</span><span>{{ bank_mark }}</span></div>
+                    </div>					<span class="help-block">为了保障会员账户安全，银行卡添加后会员不可编辑或删除。如需更改银行卡请联系客服操作。</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	(function(){
+		document.title='设置';
+		$(document).on('click','.mf_edit',function(){
+			$(this).hide();
+			$('[name=mf_qq]').removeAttr('disabled');
+			$('[name=mf_wechat]').removeAttr('disabled');
+			$('.mf_save').show();
+		})
+		//保存基础信息
+		$(document).on('click','.mf_save',function(){
+			var qq = $('[name=mf_qq]').val();
+			var wechat = $('[name=mf_wechat]').val();
+			$.ajax({
+				type:'post',
+				url:'?',
+				data:'act=editprofile&qq='+qq+'&wechat='+wechat,
+				timeout:7000,
+				success:function(data){
+					if (data==1) {
+						layer.msg('操作成功');
+					}else{
+						layer.msg(data);
+					}
+				},
+				compplete:function(XMLHttprequest){
+					if (XMLHttprequest.statusText=='timeout') {
+						layer.msg('连接超时,请更换网络环境或稍后再试!')
+					}
+				}
+
+			});
+		})
+		//编辑密码
+		$(document).on('click','.mf_editpwd',function(){
+			var o = $(this);
+			o.hide();
+			o.next('div').show();
+			var mobile = $('.user_mobile').text();
+			console.log(mobile);
+			if(!(/^1[34578]\d{9}$/.test(mobile))){
+				layer.msg('您的手机号有误，无法发送短信，请联系客服修改手机号！');
+			}
+		})
+		//发送短信
+		var wait = 60;
+		$(document).on('click','.sendsms',function(){
+			var o = $(this);
+			var ini = wait;
+			var p = setInterval(function(){
+				if (wait==ini) {
+					o.attr('disabled','disabled');
+					$.ajax({
+						type:'post',
+						url:'?',
+						data:'act=sendsms&t=1',
+						timeout:7000,
+						async:true,
+						success:function(data){
+							if (data=='短信已发送') {
+								layer.tips('短信发送成功', '.sendsms');
+							}else{
+								layer.alert('错误信息:'+data,{title:'短信发送失败'})
+							}
+						},
+						complete:function(XMLHttprequest){
+							if (XMLHttprequest.statusTest=='timeout') {
+								layer.msg('连接超时,请更换网络环境或稍后再试!');
+							}
+						}
+					});
+				}
+				o.val(wait+'s后可再次发送...');
+				wait--;
+				if (wait==0) {
+					o.removeAttr('disabled').val('发送短信');
+					wait=ini;
+					clearInterval(p);
+				}
+			},1000);
+		})
+
+		$(document).on('click','#sendsms1',function(){
+			var o = $(this);
+			var ini = wait;
+			var p = setInterval(function(){
+				if (wait==ini) {
+					o.attr('disabled','disabled');
+					$.ajax({
+						type:'post',
+						url:'?',
+						data:'act=sendsms&t=2',
+						timeout:7000,
+						async:true,
+						success:function(data){
+							if (data=='短信已发送') {
+								layer.tips('短信发送成功', '#sendsms1');
+							}else{
+								layer.alert('错误信息:'+data,{title:'短信发送失败'})
+							}
+						},
+						complete:function(XMLHttprequest){
+							if (XMLHttprequest.statusTest=='timeout') {
+								layer.msg('连接超时,请更换网络环境或稍后再试!');
+							}
+						}
+					});
+				}
+				o.val(wait+'s后可再次发送...');
+				wait--;
+				if (wait==0) {
+					o.removeAttr('disabled').val('发送短信');
+					wait=ini;
+					clearInterval(p);
+				}
+			},1000);
+		})
+
+		//保存密码
+		$(document).on('click','.mf_savepwd',function(){
+			var smscode = $('.smscode').val();
+			var newpwd = $('.newpwd').val();
+			$.ajax({
+				type:'post',
+				url:'?',
+				data:'act=savepwd&smscode='+smscode+'&newpwd='+newpwd,
+				timeout:7000,
+				async:true,
+				success:function(data){
+					if (data==1) {
+						layer.msg('密码修改成功，请重新登录');
+						setTimeout(function(){location.href='/'},1000)
+					}else{
+						layer.alert('错误信息:'+data,{title:'密码修改失败'})
+					}
+				},
+				complete:function(XMLHttprequest){
+					if (XMLHttprequest.statusTest=='timeout') {
+						layer.msg('连接超时,请更换网络环境或稍后再试!');
+					}
+				}
+			});
+		})
+		$(document).on('click','#tuoguan',function(){
+			var o = $(this);
+			var tuoguan = o.prop('checked') ? true : false;
+			if (tuoguan) {
+				var doo = 'open';
+			}else{
+				var doo = 'close';
+			}
+			$.ajax({
+				type:'post',
+				url:'?',
+				data:'act=tuoguan&do='+doo,
+				timeout:7000,
+				success:function(data){
+					if (data==1) {
+						layer.msg('操作成功');
+					}else{
+						layer.msg(data);
+					}
+				},compplete:function(XMLHttprequest){
+					if (XMLHttprequest.statusText=='timeout') {
+						layer.msg('连接超时,请更换网络环境或稍后再试!')
+					}
+				}
+			})
+		});
+		$(document).on('click','.contitle',function(){
+			var o = $(this);
+			o.next('div').slideToggle(200);
+		})
+		$(document).on('click','.add_bankcard',function(){
+			layer.open({
+				title:'添加银行卡',
+			 	type: 1, 
+				content: "<fieldset class='addnewcard'><div class='form-group'><label for='bank' class='col-lg-2 control-label'>银行：</label><div class='col-lg-10 '><select class='form-control' id='bank'><option value='工商银行'>工商银行</option><option value='建设银行'>建设银行</option><option value='中国银行'>中国银行</option><option value='交通银行'>交通银行</option><option value='农业银行'>农业银行</option><option value='招商银行'>招商银行</option><option value='徽商银行'>招商银行</option><option value='邮政储蓄银行'>邮政储蓄银行</option><option value='光大银行'>光大银行</option><option value='民生银行'>民生银行</option><option value='平安银行'>平安银行</option><option value='浦发银行'>浦发银行</option><option value='中信银行'>中信银行</option><option value='兴业银行'>兴业银行</option><option value='华夏银行'>华夏银行</option><option value='广发银行'>广发银行</option><option value='北京银行'>北京银行</option><option value='其他请备注'>其他请备注</option></select></div></div><div class='form-group'><label for='account' class='col-lg-2 control-label'>卡号：</label><div class='col-lg-10 '><input type='text' class='form-control' id='account' placeholder='卡号'></div></div><div class='form-group'><label for='owner' class='col-lg-2 control-label'>持卡人：</label><div class='col-lg-10 '><input type='text' class='form-control' id='owner' placeholder='持卡人'></div></div><div class='form-group'><label for='addr' class='col-lg-2 control-label'>分行：</label><div class='col-lg-10 '><input type='text' class='form-control' id='addr' placeholder='分行'></div></div><div class='form-group'><label for='alipay' class='col-lg-2 control-label'>支付宝：</label><div class='col-lg-10 '><input type='text' class='form-control' id='alipay' placeholder='支付宝'></div></div><div class='form-group'><label for='beizhu' class='col-lg-2 control-label'>备注</label><div class='col-lg-10 '><textarea class='form-control' rows='3' id='beizhu'></textarea></div></div><div class='form-group'><label for='smscode' class='col-lg-2 control-label'>验证码</label><div class='col-lg-10 '><input type='button' class='form-control btn btn-primary' id='sendsms1' value='发送短信' style='display:inline-block;width:50%'><input type='text' class='form-control' id='smscode' placeholder='短信验证码' style='display:inline-block;width:50%'></div></div></fieldset>",
+				area: ['500px', '70%'],
+				offset:'5%',
+				btn: ['保存', '取消'],
+				yes: function(index, layero){
+				    var bank = $('#bank').val();
+				    var account = $('#account').val();
+				    var owner = $('#owner').val();
+				    var addr = $('#addr').val();
+				    var alipay = $('#alipay').val();
+				    var beizhu = $('#beizhu').val();
+				    var smscode = $('#smscode').val();
+				    $.ajax({
+				    	type:'post',
+				    	url:'?',
+				    	data:'act=addbankcard&bank='+bank+'&account='+account+'&owner='+owner+'&addr='+addr+'&alipay='+alipay+'&beizhu='+beizhu+'&smscode='+smscode,
+				    	timeout:7000,
+				    	success:function(data){
+				    		if (data==1) {
+				    			layer.msg('添加成功');
+				    			layer.close(index);
+				    		}else{
+				    			layer.msg(data)
+				    		}
+				    	},
+				    	complete:function(XMLHttprequest){
+				    		if (XMLHttprequest.statusText=='timeout') {
+				    			layer.msg('连接超时,请更换网络环境或稍后再试!');
+				    		}
+				    	}
+				    });
+				},
+				btn2: function(index, layero){
+					console.log('222')
+				}
+			}); 
+		})
+	})();
+</script>

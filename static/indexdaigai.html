@@ -531,7 +531,7 @@
             </div>
         </div>
 
-        <div class="contitle" style="height: auto">
+        <!--<div class="contitle" style="height: auto">
             <div class="fixed-table-pagination" style="display: block;">
                 <div class="pull-left pagination-detail">
                     <span class="pagination-info" id="second-page-bottom" style="font-size: .8em;color: grey">（共 6 条）每页 5 条</span>
@@ -543,7 +543,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
 	</div>
 
 	<div class="orderlist out" id="orderlist-out">
@@ -748,12 +748,16 @@
         </div>
 
         <div class="fixed-table-pagination" style="display: block;">
-            <div class="pull-left pagination-detail">
-				        <span class="pagination-info" style="font-size: .8em;color: #fff">
-				        (共 6 条)				        </span>
+            <div class="pull-left-pagination-detail">
+                <span class="pagination-info" id="first-page-bottom" style="font-size: .8em;color: grey">（共 6 条）每页 5 条</span>
+                <div id="page1-box">
+                    <span class="page_arrows" id="list_out_pre"><</span>
+                    <span class="page_selected" id="first-page-1">1</span>
+                    <span class="page_normal" id="second-page-1">2</span>
+                    <span class="page_arrows" id="list_out_next">></span>
+                </div>
             </div>
         </div>
-
 	</div>
 
 
@@ -895,190 +899,190 @@
 
     //分页
     window.onload = function () {
-                    var prePage1 = document.getElementById("list_out_pre");
-                    var nextPage1 = document.getElementById("list_out_next");
-                    var first1 = document.getElementById("first-page-1");
-                    var second1 = document.getElementById("second-page-1");
-                    var firstPageBottom = document.getElementById("first-page-bottom");
-                    var allList1 = $("#orderlist-out").children("div");
+        var prePage1 = document.getElementById("list_out_pre");
+        var nextPage1 = document.getElementById("list_out_next");
+        var first1 = document.getElementById("first-page-1");
+        var second1 = document.getElementById("second-page-1");
+        var firstPageBottom = document.getElementById("first-page-bottom");
+        var allList1 = $("#orderlist-out").children("div");
 
-                    var prePage2 = document.getElementById("list_in_pre");
-                    var nextPage2 = document.getElementById("list_in_next");
-                    var first2 = document.getElementById("first-page-2");
-                    var second2 = document.getElementById("second-page-2");
-                    var secondPageBottom = document.getElementById("second-page-bottom");
-                    var allList2 = $("#orderlist-in").children("div");
+        var prePage2 = document.getElementById("list_in_pre");
+        var nextPage2 = document.getElementById("list_in_next");
+        var first2 = document.getElementById("first-page-2");
+        var second2 = document.getElementById("second-page-2");
+        var secondPageBottom = document.getElementById("second-page-bottom");
+        var allList2 = $("#orderlist-in").children("div");
 
-                    var itemSize1 = (allList1.length - 2) / 2;
-                    var currentPage1 = 1;
-                    var anotherPage1 = 2;
-                    var lastPage1 = Math.ceil(itemSize1 / 5);
-                    var itemSize2 = (allList2.length - 2) / 2;
-                    var currentPage2 = 1;
-                    var anotherPage2 = 2;
-                    var lastPage2 = Math.ceil(itemSize2 / 5);
+        var itemSize1 = (allList1.length - 2) / 2;
+        var currentPage1 = 1;
+        var anotherPage1 = 2;
+        var lastPage1 = Math.ceil(itemSize1 / 5);
+        var itemSize2 = (allList2.length - 2) / 2;
+        var currentPage2 = 1;
+        var anotherPage2 = 2;
+        var lastPage2 = Math.ceil(itemSize2 / 5);
 
-                    //显示第n页的内容
-                    function showPage(currentPage, lastPage, itemSize, allList){
-                        var start = (currentPage - 1) * 5 * 2 + 1;
-                        var end;
-                        if(currentPage != lastPage){
-                            end = currentPage * 5 * 2;
-                        }else{
-                            end = itemSize * 2;
-                        }
-                        console.log("start:"+start+",end:"+end+",itemSize:"+itemSize+",currentPage:"+currentPage+",lastPage:"+lastPage);
-                        for(var i = 1;i < allList.length - 1;i++){
-                            allList[i].style.display = "";
-                            if(i < start || i > end){
-                                allList[i].style.display = "none";
-                            }
-                        }
-                    }
-                    showPage(currentPage1, lastPage1, itemSize1, allList1);
-                    showPage(currentPage2, lastPage2, itemSize2, allList2);
-                    if(lastPage1 == 1){
-                        second1.style.display = "none";
-                    }
-                    if(lastPage2 == 1){
-                        second2.style.display = "none";
-                    }
-                    firstPageBottom.innerText = "（共 "+itemSize1+" 条）每页 5 条";
-                    secondPageBottom.innerText = "（共 "+itemSize2+" 条）每页 5 条";
-
-                    //事件
-                    prePage1.onclick = function () {
-                        if(currentPage1 == 1){
-                            alert("已经是第一页");
-                        }else{
-                            currentPage1--;
-                            anotherPage1--;
-                            first1.innerText = currentPage1;
-                            second1.innerText = anotherPage1;
-                            first1.className = "page_selected";
-                            second1.className = "page_normal";
-                            showPage(currentPage1, lastPage1, itemSize1, allList1);
-                        }
-                    }
-
-                    nextPage1.onclick = function () {
-                        if(currentPage1 == lastPage1){
-                            alert("已经是最后一页");
-                        }
-                        else if(currentPage1 == lastPage1 - 1){
-                            first1.innerText = currentPage1;
-                            second1.innerText = anotherPage1;
-                            first1.className = "page_normal";
-                            second1.className = "page_selected";
-                            currentPage1++;
-                            anotherPage1++;
-                            showPage(currentPage1, lastPage1, itemSize1, allList1);
-                        }else{
-                            currentPage1++;
-                            anotherPage1++;
-                            first1.innerText = currentPage1;
-                            second1.innerText = anotherPage1;
-                            showPage(currentPage1, lastPage1, itemSize1, allList1);
-                        }
-                    }
-
-                    first1.onclick = function () {
-                        if(anotherPage1 > lastPage1 && lastPage1 != 1){
-                            currentPage1--;
-                            anotherPage1--;
-                            first1.className = "page_selected";
-                            second1.className = "page_normal";
-                            showPage(currentPage1, lastPage1, itemSize1, allList1);
-                        }
-                    }
-
-                    second1.onclick =function () {
-                        if(anotherPage1 <= lastPage1){
-                            if(anotherPage1 == lastPage1){
-                                first1.innerText = currentPage1;
-                                second1.innerText = anotherPage1;
-                                first1.className = "page_normal";
-                                second1.className = "page_selected";
-                                currentPage1++;
-                                anotherPage1++;
-                            }else{
-                                currentPage1++;
-                                anotherPage1++;
-                                first1.innerText = currentPage1;
-                                second1.innerText = anotherPage1;
-                                first1.className = "page_selected";
-                                second1.className = "page_normal";
-                            }
-                            showPage(currentPage1, lastPage1, itemSize1, allList1);
-                        }
-                    }
-
-                    prePage2.onclick = function () {
-                        if(currentPage2 == 1){
-                            alert("已经是第一页");
-                        }else{
-                            currentPage2--;
-                            anotherPage2--;
-                            first2.innerText = currentPage2;
-                            second2.innerText = anotherPage2;
-                            first2.className = "page_normal";
-                            second2.className = "page_selected";
-                            showPage(currentPage2, lastPage2, itemSize2, allList2);
-                        }
-                    }
-
-                    nextPage2.onclick = function () {
-                        if(currentPage2 == lastPage2){
-                            alert("已经是最后一页");
-                        }
-                        else if(currentPage2 == lastPage2 - 1){
-                            first2.innerText = currentPage2;
-                            second2.innerText = anotherPage2;
-                            first2.className = "page_normal";
-                            second2.className = "page_selected";
-                            currentPage2++;
-                            anotherPage2++;
-                            showPage(currentPage2, lastPage2, itemSize2, allList2);
-                        }else{
-                            currentPage2++;
-                            anotherPage2++;
-                            first2.innerText = currentPage2;
-                            second2.innerText = anotherPage2;
-                            showPage(currentPage2, lastPage2, itemSize2, allList2);
-                        }
-                    }
-
-                    first2.onclick = function () {
-                        if(anotherPage2 > lastPage2 && lastPage2 != 1){
-                            currentPage2--;
-                            anotherPage2--;
-                            first2.className = "page_selected";
-                            second2.className = "page_normal";
-                            showPage(currentPage2, lastPage2, itemSize2, allList2);
-                        }
-                    }
-
-                    second2.onclick =function () {
-                        if(anotherPage2 <= lastPage2){
-                            if(anotherPage2 == lastPage2){
-                                first2.innerText = currentPage2;
-                                second2.innerText = anotherPage2;
-                                first2.className = "page_normal";
-                                second2.className = "page_selected";
-                                currentPage2++;
-                                anotherPage2++;
-                            }else{
-                                currentPage2++;
-                                anotherPage2++;
-                                first2.innerText = currentPage2;
-                                second2.innerText = anotherPage2;
-                                first2.className = "page_selected";
-                                second2.className = "page_normal";
-                            }
-                            showPage(currentPage2, lastPage2, itemSize2, allList2);
-                        }
-                    }
+        //显示第n页的内容
+        function showPage(currentPage, lastPage, itemSize, allList){
+            var start = (currentPage - 1) * 5 * 2 + 1;
+            var end;
+            if(currentPage != lastPage){
+                end = currentPage * 5 * 2;
+            }else{
+                end = itemSize * 2;
+            }
+            console.log("start:"+start+",end:"+end+",itemSize:"+itemSize+",currentPage:"+currentPage+",lastPage:"+lastPage);
+            for(var i = 1;i < allList.length - 1;i++){
+                allList[i].style.display = "";
+                if(i < start || i > end){
+                    allList[i].style.display = "none";
                 }
+            }
+        }
+        showPage(currentPage1, lastPage1, itemSize1, allList1);
+        showPage(currentPage2, lastPage2, itemSize2, allList2);
+        if(lastPage1 == 1){
+            second1.style.display = "none";
+        }
+        if(lastPage2 == 1){
+            second2.style.display = "none";
+        }
+        firstPageBottom.innerText = "（共 "+itemSize1+" 条）每页 5 条";
+        secondPageBottom.innerText = "（共 "+itemSize2+" 条）每页 5 条";
+
+        //事件
+        prePage1.onclick = function () {
+            if(currentPage1 == 1){
+                alert("已经是第一页");
+            }else{
+                currentPage1--;
+                anotherPage1--;
+                first1.innerText = currentPage1;
+                second1.innerText = anotherPage1;
+                first1.className = "page_selected";
+                second1.className = "page_normal";
+                showPage(currentPage1, lastPage1, itemSize1, allList1);
+            }
+        }
+
+        nextPage1.onclick = function () {
+            if(currentPage1 == lastPage1){
+                alert("已经是最后一页");
+            }
+            else if(currentPage1 == lastPage1 - 1){
+                first1.innerText = currentPage1;
+                second1.innerText = anotherPage1;
+                first1.className = "page_normal";
+                second1.className = "page_selected";
+                currentPage1++;
+                anotherPage1++;
+                showPage(currentPage1, lastPage1, itemSize1, allList1);
+            }else{
+                currentPage1++;
+                anotherPage1++;
+                first1.innerText = currentPage1;
+                second1.innerText = anotherPage1;
+                showPage(currentPage1, lastPage1, itemSize1, allList1);
+            }
+        }
+
+        first1.onclick = function () {
+            if(anotherPage1 > lastPage1 && lastPage1 != 1){
+                currentPage1--;
+                anotherPage1--;
+                first1.className = "page_selected";
+                second1.className = "page_normal";
+                showPage(currentPage1, lastPage1, itemSize1, allList1);
+            }
+        }
+
+        second1.onclick =function () {
+            if(anotherPage1 <= lastPage1){
+                if(anotherPage1 == lastPage1){
+                    first1.innerText = currentPage1;
+                    second1.innerText = anotherPage1;
+                    first1.className = "page_normal";
+                    second1.className = "page_selected";
+                    currentPage1++;
+                    anotherPage1++;
+                }else{
+                    currentPage1++;
+                    anotherPage1++;
+                    first1.innerText = currentPage1;
+                    second1.innerText = anotherPage1;
+                    first1.className = "page_selected";
+                    second1.className = "page_normal";
+                }
+                showPage(currentPage1, lastPage1, itemSize1, allList1);
+            }
+        }
+
+        prePage2.onclick = function () {
+            if(currentPage2 == 1){
+                alert("已经是第一页");
+            }else{
+                currentPage2--;
+                anotherPage2--;
+                first2.innerText = currentPage2;
+                second2.innerText = anotherPage2;
+                first2.className = "page_normal";
+                second2.className = "page_selected";
+                showPage(currentPage2, lastPage2, itemSize2, allList2);
+            }
+        }
+
+        nextPage2.onclick = function () {
+            if(currentPage2 == lastPage2){
+                alert("已经是最后一页");
+            }
+            else if(currentPage2 == lastPage2 - 1){
+                first2.innerText = currentPage2;
+                second2.innerText = anotherPage2;
+                first2.className = "page_normal";
+                second2.className = "page_selected";
+                currentPage2++;
+                anotherPage2++;
+                showPage(currentPage2, lastPage2, itemSize2, allList2);
+            }else{
+                currentPage2++;
+                anotherPage2++;
+                first2.innerText = currentPage2;
+                second2.innerText = anotherPage2;
+                showPage(currentPage2, lastPage2, itemSize2, allList2);
+            }
+        }
+
+        first2.onclick = function () {
+            if(anotherPage2 > lastPage2 && lastPage2 != 1){
+                currentPage2--;
+                anotherPage2--;
+                first2.className = "page_selected";
+                second2.className = "page_normal";
+                showPage(currentPage2, lastPage2, itemSize2, allList2);
+            }
+        }
+
+        second2.onclick =function () {
+            if(anotherPage2 <= lastPage2){
+                if(anotherPage2 == lastPage2){
+                    first2.innerText = currentPage2;
+                    second2.innerText = anotherPage2;
+                    first2.className = "page_normal";
+                    second2.className = "page_selected";
+                    currentPage2++;
+                    anotherPage2++;
+                }else{
+                    currentPage2++;
+                    anotherPage2++;
+                    first2.innerText = currentPage2;
+                    second2.innerText = anotherPage2;
+                    first2.className = "page_selected";
+                    second2.className = "page_normal";
+                }
+                showPage(currentPage2, lastPage2, itemSize2, allList2);
+            }
+        }
+    }
 
 </script>
 
